@@ -7,6 +7,7 @@
 
 
 class load {
+    char czarakter;
 };
 
 
