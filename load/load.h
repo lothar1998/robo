@@ -12,3 +12,6 @@ class load {
 
 
 #endif //ROBO_LOAD_H
+
+
+//siema
