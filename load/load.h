@@ -7,6 +7,7 @@
 
 
 class load {
+    int a;
 };
 
 
