@@ -7,7 +7,11 @@
 
 
 class load {
-
+    int a;
 };
 
+
 #endif //ROBO_LOAD_H
+
+
+//siema
