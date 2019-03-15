@@ -24,3 +24,23 @@ unsigned int coordinates::get_y()
 {
 	return this->y;
 }
+
+bool coordinates::operator==(const coordinates &A)
+{
+	if (this->x == A.x && this->y == A.y)
+		return true;
+	else
+		return false;
+}
+
+coordinates::coordinates(const coordinates &A)
+{
+	this->x = A.x;
+	this->y = A.y;
+}
+
+void coordinates::set_coordinates(unsigned int x, unsigned int y)
+{
+	this->x = x;
+	this->y = y;
+}

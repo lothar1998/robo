@@ -6,12 +6,14 @@ public:
 	path();
 	path(int, int, int**,unsigned int);
 	~path();
-
-	vector<coordinates> find_path(coordinates,coordinates);
-
+	vector<coordinates> find_optimal_path(coordinates,coordinates);
 private:
+	vector<coordinates>* find_path(coordinates*, coordinates*,vector<coordinates>*);
 	unsigned int forbidden_val;
-	coordinates draw_nearby_coordinate(unsigned int, unsigned int);
-	bool is_exist(int,int);
+	bool is_inside_map(int*, int*);
+	int ile;//temporary
+	short int directions[8][2];
+	
+	
 };
 

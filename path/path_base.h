@@ -11,7 +11,7 @@ public:
 	path_base(int, int, int **);
 	virtual ~path_base();
 
-	virtual vector<coordinates> find_path(coordinates, coordinates) = 0;
+	virtual vector<coordinates> find_optimal_path(coordinates, coordinates) = 0;
 
 protected:
 	int sizeX;
