@@ -10,10 +10,6 @@ coordinates::coordinates(unsigned int x, unsigned int y) : x(x), y(y)
 {
 }
 
-coordinates::~coordinates()
-{
-}
-
 
 unsigned int coordinates::get_x()
 {
@@ -27,7 +23,7 @@ unsigned int coordinates::get_y()
 
 bool coordinates::operator==(const coordinates &A)
 {
-	if (this->x == A.x && this->y == A.y)
+	if (x == A.x && y == A.y)
 		return true;
 	else
 		return false;

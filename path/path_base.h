@@ -7,9 +7,8 @@ using namespace std;
 class path_base
 {
 public:
-	path_base();
 	path_base(int, int, int **);
-	virtual ~path_base();
+	virtual ~path_base()= 0;
 
 	virtual vector<coordinates> find_optimal_path(coordinates, coordinates) = 0;
 

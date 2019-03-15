@@ -1,12 +1,9 @@
 #include "path.h"
 #include <random>
 #include <iostream>//delete
+#include <chrono>
 
 using namespace std;
-
-path::path()
-{
-}
 
 path::path(int sizeX, int sizeY, int** map, unsigned int forbidden_value) :path_base(sizeX, sizeY, map),forbidden_val(forbidden_value)
 {
@@ -46,9 +43,6 @@ path::path(int sizeX, int sizeY, int** map, unsigned int forbidden_value) :path_
 	directions[7][1] = 1;
 }
 
-path::~path()
-{
-}
 
 vector<coordinates> path::find_optimal_path(coordinates start, coordinates stop)
 {
@@ -69,26 +63,26 @@ vector<coordinates>* path::find_path(coordinates *start, coordinates *stop, vect
 {
 	/*----set random generator----*/
 
-	std::default_random_engine generator;
+    unsigned seed = (unsigned)std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(seed);
 	std::uniform_int_distribution<int> distribution(0,7);
 	
-	ile = 0;//delete
+
 
 	coordinates temp(start->get_x(),start->get_y());
 
 	path_coordinates->push_back(temp);
 
-	int draw_x, draw_y;
+	unsigned int draw_x, draw_y;
 	unsigned short int r;
 
 
 	do
 	{
 		do {
-			r = distribution(generator);
-			draw_x = temp.get_x() + directions[r][1];
-			draw_y = temp.get_y() + directions[r][2];
-			ile += 2;
+			r = (unsigned short int)distribution(generator);
+			draw_x = temp.get_x() + directions[r][0];
+			draw_y = temp.get_y() + directions[r][1];
 		} while ((draw_x == temp.get_x() && draw_y == temp.get_y()) || !is_inside_map(&draw_x, &draw_y));
 
 		temp.set_coordinates(draw_x, draw_y);
@@ -97,15 +91,13 @@ vector<coordinates>* path::find_path(coordinates *start, coordinates *stop, vect
 
 	} while (temp.get_x() != stop->get_x() || temp.get_y() != stop->get_y());
 
-	cout << "percentage: " << (double)((double)(path_coordinates->size()) / (double)ile) << endl;//delete
-
 	return path_coordinates;
 }
 
 
-bool path::is_inside_map(int *x, int *y)
+bool path::is_inside_map(unsigned int *x,unsigned int *y)
 {
-	if ((*x >= 0 && *x <= this->sizeX - 1) && (*y >= 0 && *y <= this->sizeY - 1))
+	if ((*x >= 0 && *x <= sizeX - 1) && (*y >= 0 && *y <= sizeY - 1))
 		return true;
 	else
 		return false;
