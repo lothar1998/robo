@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include "path.h"
-
+#define _DIM_X 64
+#define _DIM_Y 32
 
 using namespace std;
 
@@ -12,47 +13,66 @@ int main()
 
     char temp;
 
-    int **wsk = new int *[64];
+    auto **wsk = new int *[_DIM_X];
 
-    for (int i = 0; i < 64; i++)
-        wsk[i] = new int[32];
+    for (int i = 0; i < _DIM_X; i++)
+        wsk[i] = new int[_DIM_Y];
 
-    for (int i = 0; i < 32; i++)
-        for (int j = 0; j < 64; j++)
+    for (int i = 0; i < _DIM_Y; i++)
+        for (int j = 0; j < _DIM_X; j++)
         {
             file >> temp;
-            wsk[j][i] = (int)temp-48;
+            if((int)temp-48==9)
+                wsk[j][i]=_DIM_X*_DIM_Y;
+            else
+                wsk[j][i] =(int)temp-48;
         }
 
-    cout<<endl;
-    cout<<endl;
-
-
-    path sciezka(64, 32, wsk, 9);
-
-    coordinates start(14, 1);
-    coordinates stop(20, 31);
-
-    vector<coordinates> optimum = sciezka.find_optimal_path(start, stop);
-
-
-
-
-    for (unsigned int i = 0; i < optimum.size(); i++)
-        wsk[optimum.at(i).get_x()][optimum.at(i).get_y()] = 0;
-
-    wsk[14][1] = 5;
-    wsk[20][31] = 3;
-
-    for (int i = 0; i < 32; i++)
+    for (int i = 0; i < _DIM_Y; i++)
     {
-        for (int j = 0; j < 64; j++)
-            cout << wsk[j][i];
+        for (int j = 0; j < _DIM_X; j++)
+            if(wsk[j][i]==_DIM_X*_DIM_Y)
+                cout << "*";
+            else
+                cout << wsk[j][i];
 
         cout << endl;
     }
 
-    for (int i = 0; i < 64; i++)
+    file.close();
+    cout<<endl;
+    cout<<endl;
+
+
+    path sciezka(_DIM_X, _DIM_Y, wsk, _DIM_X*_DIM_Y);
+
+    coordinates start(14, 0);//14 1
+    coordinates stop(20, 31);//20 31
+
+    vector<coordinates> optimum = sciezka.find_path(start, stop);
+
+    cout<<"length of path"<<optimum.size()<<endl;
+    cout<<endl;
+
+
+    for (auto i:optimum)
+        wsk[i.get_x()][i.get_y()] = 0;
+
+    //wsk[14][1] = 5;
+    //wsk[20][31] = 3;
+
+    for (int i = 0; i < _DIM_Y; i++)
+    {
+        for (int j = 0; j < _DIM_X; j++)
+            if(wsk[j][i]==_DIM_X*_DIM_Y)
+                cout << "*";
+            else
+                cout << wsk[j][i];
+
+        cout << endl;
+    }
+
+    for (int i = 0; i < _DIM_X; i++)
         delete wsk[i];
 
     delete[] wsk;
