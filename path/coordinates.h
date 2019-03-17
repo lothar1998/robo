@@ -1,6 +1,8 @@
 #pragma once
-class coordinates
-{
+
+using namespace std;
+
+class coordinates {
 public:
 	coordinates();
 	coordinates(unsigned int, unsigned int);
@@ -13,4 +15,3 @@ public:
 private:
 	unsigned int x, y;
 };
-
