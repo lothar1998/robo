@@ -2,9 +2,9 @@
 #include <random>
 #include <chrono>
 #include <algorithm>
-#define _MAX_NUM_GENERATION 100
-#define _MAX_NUM_GENOTYPES 100
-#define _NUM_UNCHANGED_GENERATIONS 100
+#define _MAX_NUM_GENERATION 10
+#define _MAX_NUM_GENOTYPES 10
+#define _NUM_UNCHANGED_GENERATIONS 10
 
 using namespace std;
 
@@ -151,13 +151,15 @@ vector<coordinates>* path::draw_path(coordinates *start, coordinates *stop, vect
 			r = (unsigned short int)distribution(generator);
 			draw_x = temp.get_x() + directions[r][0];
 			draw_y = temp.get_y() + directions[r][1];
-		} while ((draw_x == temp.get_x() && draw_y == temp.get_y()) || !is_inside_map(&draw_x, &draw_y));
+		} while ((draw_x == temp.get_x() && draw_y == temp.get_y()) || !is_inside_map(&draw_x, &draw_y) || is_forbidden(&draw_x,&draw_y));
 
 		temp.set_coordinates(draw_x, draw_y);
 
 		path_coordinates->push_back(temp);
 
 	} while (temp.get_x() != stop->get_x() || temp.get_y() != stop->get_y());
+
+	optimize(path_coordinates);
 
 	return path_coordinates;
 }
@@ -330,5 +332,32 @@ void path::sort_array(unsigned int * array, unsigned int size, unsigned int *cos
         x = array[i];
         array[i] = array[minP];
         array[minP] = x;
+    }
+}
+
+bool path::is_forbidden(unsigned int *x, unsigned int *y) {
+
+    if(map[*x][*y]==forbidden_val)
+        return true;
+    else
+        return false;
+}
+
+void path::optimize(vector<coordinates> *path_coordinates) {
+
+    /*---optimize path---*/
+
+    coordinates temp;
+    vector<coordinates>::iterator it;
+
+    for(unsigned int i=0;i<path_coordinates->size()-2;i++){
+
+        temp=path_coordinates->at(i);
+        it=path_coordinates->begin()+i;
+
+        do{
+            path_coordinates->erase(path_coordinates->begin()+i,it);
+            it = find(path_coordinates->begin()+i+1,path_coordinates->end(),temp);
+        }while(it!=path_coordinates->end());
     }
 }

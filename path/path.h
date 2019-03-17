@@ -18,5 +18,7 @@ private:
 	bool is_inside_map(unsigned int*, unsigned int*);
 	unsigned int calculate_cost(vector<coordinates> *);
 	void sort_array(unsigned int *, unsigned int, unsigned int*);
+	bool is_forbidden(unsigned int*, unsigned int*);
+	void optimize(vector<coordinates>*);
 };
 

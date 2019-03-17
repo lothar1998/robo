@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     fstream file;
-    file.open("map.txt", ios::in);
+    file.open("examples/map.txt", ios::in);
 
     char temp;
 
@@ -46,13 +46,16 @@ int main()
 
     path sciezka(_DIM_X, _DIM_Y, wsk, _DIM_X*_DIM_Y);
 
-    coordinates start(14, 0);//14 1
-    coordinates stop(20, 31);//20 31
+    coordinates start(14, 1);//14 1 . 0 0
+    coordinates stop(20, 31);//20 31 . 48 0
+
+
 
     vector<coordinates> optimum = sciezka.find_path(start, stop);
 
-    cout<<"length of path"<<optimum.size()<<endl;
+    cout<<"length of path: "<<optimum.size()<<endl;
     cout<<endl;
+
 
 
     for (auto i:optimum)
@@ -60,17 +63,23 @@ int main()
 
     //wsk[14][1] = 5;
     //wsk[20][31] = 3;
+    int count=0;
 
     for (int i = 0; i < _DIM_Y; i++)
     {
-        for (int j = 0; j < _DIM_X; j++)
-            if(wsk[j][i]==_DIM_X*_DIM_Y)
+        for (int j = 0; j < _DIM_X; j++) {
+            if(wsk[j][i]==0)
+                count++;
+            if (wsk[j][i] == _DIM_X * _DIM_Y)
                 cout << "*";
             else
                 cout << wsk[j][i];
+        }
 
         cout << endl;
     }
+
+    cout<<count;
 
     for (int i = 0; i < _DIM_X; i++)
         delete wsk[i];
