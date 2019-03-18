@@ -3,7 +3,7 @@
 coordinates::coordinates():x(0),y(0) {
 }
 
-coordinates::coordinates(unsigned int x, unsigned int y) : x(x), y(y) {
+coordinates::coordinates(const unsigned int x,const unsigned int y) : x(x), y(y) {
 }
 
 
@@ -15,19 +15,15 @@ unsigned int coordinates::get_y() {
 	return this->y;
 }
 
-bool coordinates::operator==(const coordinates &A) {
+bool coordinates::operator==(const coordinates &A) const {
 	if (x == A.x && y == A.y)
 		return true;
 	else
 		return false;
 }
 
-coordinates::coordinates(const coordinates &A) {
-	this->x = A.x;
-	this->y = A.y;
-}
 
-void coordinates::set_coordinates(unsigned int x, unsigned int y) {
+void coordinates::set_coordinates(const unsigned int x,const unsigned int y) {
 	this->x = x;
 	this->y = y;
 }
