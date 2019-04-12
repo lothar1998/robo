@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     fstream file;
-    file.open("examples/map.txt", ios::in);
+    file.open("examples/map2.txt", ios::in);
 
     char temp;
 
@@ -46,8 +46,8 @@ int main()
 
     path sciezka(_DIM_X, _DIM_Y, wsk, _DIM_X*_DIM_Y);
 
-    coordinates start(14, 1);//14 1 . 0 0
-    coordinates stop(20, 31);//20 31 . 48 0
+    coordinates start(0, 0);//14 1 . 0 0
+    coordinates stop(48, 0);//20 31 . 48 0
 
 
 
