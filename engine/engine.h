@@ -30,7 +30,7 @@ public:
         FAST = 1024
     };
 
-    engine() = default;
+    engine();
     engine(pwmPin,enginePin,enginePin);
 
     void run(direction);
