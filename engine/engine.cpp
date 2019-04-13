@@ -23,8 +23,8 @@ void engine::enable_engine(engine::direction dir, engine::customSpeed engineSpee
         digitalWrite(enginePinNumber2,LOW);
     }
     else{
-        digitalWrite(enginePinNumber1,HIGH);
-        digitalWrite(enginePinNumber2,LOW);
+        digitalWrite(enginePinNumber1,LOW);
+        digitalWrite(enginePinNumber2,HIGH);
     }
 
     if(engineSpeed>0)

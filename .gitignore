@@ -263,3 +263,5 @@ __pycache__/
 *.filters
 *.sln
 /path/main.cpp
+
+test/

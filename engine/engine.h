@@ -25,8 +25,8 @@ public:
 
     enum speed{
         STOP = 0,
-        SLOW = 340,
-        MEDIUM = 680,
+        SLOW = 700,
+        MEDIUM = 850,
         FAST = 1024
     };
 
