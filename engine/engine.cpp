@@ -5,6 +5,10 @@
 #include "engine.h"
 #include <wiringPi.h>
 
+engine::engine(){
+
+}
+
 engine::engine(pwmPin pwmPinNumber,enginePin enginePin1, enginePin enginePin2):pwmPinNumber(pwmPinNumber),enginePinNumber1(enginePin1),enginePinNumber2(enginePin2){
     pinMode(pwmPinNumber,PWM_OUTPUT);
     pinMode(enginePin1,OUTPUT);
