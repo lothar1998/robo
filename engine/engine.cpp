@@ -15,6 +15,12 @@ engine::engine(pwmPin pwmPinNumber,enginePin enginePin1, enginePin enginePin2):p
     pinMode(enginePin2,OUTPUT);
 }
 
+engine::engine(const engine & A){
+    this->pwmPinNumber=A.pwmPinNumber;
+    this->enginePinNumber1=A.enginePinNumber1;
+    this->enginePinNumber2=A.enginePinNumber2;
+}
+
 void engine::stop() {
     digitalWrite(enginePinNumber1,LOW);
     digitalWrite(enginePinNumber2,LOW);

@@ -32,6 +32,7 @@ public:
 
     engine();
     engine(pwmPin,enginePin,enginePin);
+    engine(const engine &);
 
     void run(direction);
     void run(direction,speed);
