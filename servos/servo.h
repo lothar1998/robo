@@ -29,11 +29,11 @@ public:
         CH15 = 15
     };
 
-    servo(unsigned int  = 0x40);
+    servo(unsigned int  = 0x40,channel, unsigned int);
 
     void setPWMFreq(unsigned int);
-    void setPWM(channel,unsigned int, unsigned int);
-    void setServoPulse(channel, unsigned int);
+    void setPWM(unsigned int, unsigned int);
+    void setServoPulse(unsigned int);
 
 
 private:
@@ -56,6 +56,7 @@ private:
     int bus;
     unsigned int address;
     unsigned int mode;
+    channel ch;
 
     void write(reg,unsigned int);
     unsigned int read(reg);

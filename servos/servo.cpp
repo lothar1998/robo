@@ -9,10 +9,12 @@
 
 using namespace std;
 
-servo::servo(unsigned int address) {
+servo::servo(unsigned int address, channel ch, unsigned int frequency) {
     bus=wiringPiI2CSetup(address);
     this->address=address;
     this->write(__MODE1,0x00);
+    this->ch = ch;
+    this->setPWMFreq(frequency);
 }
 
 void servo::write(servo::reg reg, unsigned int value) {
@@ -40,14 +42,14 @@ void servo::setPWMFreq(unsigned int frequency) {
 
 }
 
-void servo::setPWM(servo::channel channel, unsigned int on, unsigned int off) {
-    this->write(__LED0_ON_L+4*channel, on & 0xFF);
-    this->write(__LED0_OFF_H+4*channel, on >> 8);
-    this->write(__LED0_OFF_L+4*channel, off & 0xFF);
-    this->write(__LED0_OFF_H+4*channel, off >> 8);
+void servo::setPWM( unsigned int on, unsigned int off) {
+    this->write(__LED0_ON_L+4*ch, on & 0xFF);
+    this->write(__LED0_OFF_H+4*ch, on >> 8);
+    this->write(__LED0_OFF_L+4*ch, off & 0xFF);
+    this->write(__LED0_OFF_H+4*ch, off >> 8);
 }
 
-void servo::setServoPulse(servo::channel channel, unsigned int pulse) {
+void servo::setServoPulse(unsigned int pulse) {
     pulse = pulse*4096/20000;
-    this->setPWM(channel, 0, int(pulse));
+    this->setPWM(ch, 0, int(pulse));
 }
