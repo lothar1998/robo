@@ -14,6 +14,7 @@ servo::servo(channel ch, unsigned int frequency, unsigned int address) {
     this->address=address;
     this->write(__MODE1,0x00);
     this->ch = ch;
+    this->frequency=frequency;
     this->setPWMFreq(frequency);
 }
 
@@ -50,6 +51,6 @@ void servo::setPWM( unsigned int on, unsigned int off) {
 }
 
 void servo::setServoPulse(unsigned int pulse) {
-    pulse = pulse*4096/20000;
+    pulse = pulse*4096/(1/frequency*1000000);
     this->setPWM(0, int(pulse));
 }

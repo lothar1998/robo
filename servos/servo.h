@@ -57,6 +57,7 @@ private:
     unsigned int address;
     unsigned int mode;
     channel ch;
+    unsigned int frequency;
 
     void write(reg,unsigned int);
     unsigned int read(reg);
