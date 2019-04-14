@@ -3,7 +3,7 @@
 //
 
 #include "servo.h"
-#include <wiringPi.h>
+#include <wiringPiI2C.h>
 #include <exception>
 #include <cmath>
 
