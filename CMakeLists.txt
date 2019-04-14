@@ -14,4 +14,4 @@ add_executable(robo1
         path/path.h
         path/path_base.cpp
         path/path_base.h
-        robo/main.cpp engine/engine.cpp engine/engine.h)
+        robo/main.cpp engine/engine.cpp engine/engine.h servos/servo.cpp servos/servo.h)
