@@ -51,5 +51,5 @@ void servo::setPWM( unsigned int on, unsigned int off) {
 
 void servo::setServoPulse(unsigned int pulse) {
     pulse = pulse*4096/20000;
-    this->setPWM(ch, 0, int(pulse));
+    this->setPWM(0, int(pulse));
 }
