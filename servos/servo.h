@@ -29,7 +29,7 @@ public:
         CH15 = 15
     };
 
-    servo(unsigned int  = 0x40,channel, unsigned int);
+    servo(channel, unsigned int, unsigned int  = 0x40);
 
     void setPWMFreq(unsigned int);
     void setPWM(unsigned int, unsigned int);

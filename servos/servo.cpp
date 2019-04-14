@@ -9,7 +9,7 @@
 
 using namespace std;
 
-servo::servo(unsigned int address, channel ch, unsigned int frequency) {
+servo::servo(channel ch, unsigned int frequency, unsigned int address) {
     bus=wiringPiI2CSetup(address);
     this->address=address;
     this->write(__MODE1,0x00);
