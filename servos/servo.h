@@ -32,6 +32,9 @@ public:
     servo(channel, unsigned int, unsigned int  = 0x40);
 
     bool setServoAngle(unsigned int);
+    bool setServoMin();
+    bool setServoMid();
+    bool setServoMax();
 
 
 private:
