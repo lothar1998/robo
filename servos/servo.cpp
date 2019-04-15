@@ -50,7 +50,12 @@ void servo::setPWM( unsigned int on, unsigned int off) {
     this->write(__LED0_OFF_H+4*ch, off >> 8);
 }
 
-void servo::setServoPulse(unsigned int pulse) {
-    pulse = pulse*4096*0.000001*frequency;
-    this->setPWM(0, int(pulse));
+bool servo::setServoAngle(unsigned int angle) {
+
+    if(angle>=0&&angle<=360) {
+        this->setPWM(0, angle + 140);
+        return true;
+    }
+    else
+        return false;
 }

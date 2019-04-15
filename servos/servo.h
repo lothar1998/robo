@@ -31,9 +31,7 @@ public:
 
     servo(channel, unsigned int, unsigned int  = 0x40);
 
-    void setPWMFreq(unsigned int);
-    void setPWM(unsigned int, unsigned int);
-    void setServoPulse(unsigned int);
+    bool setServoAngle(unsigned int);
 
 
 private:
@@ -61,6 +59,8 @@ private:
 
     void write(reg,unsigned int);
     unsigned int read(reg);
+    void setPWMFreq(unsigned int);
+    void setPWM(unsigned int, unsigned int);
 };
 
 
