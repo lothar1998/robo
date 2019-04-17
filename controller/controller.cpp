@@ -41,16 +41,17 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
 
 controller::~controller() {
     try {
+        shutdown(clientSocketHandle,SHUT_RDWR);
         shutdown(socketHandle,SHUT_RDWR);
-    }catch (string &e){
-        cout<<"shutdown exception: "<<e<<endl;
+    }catch (string &e) {
+        cout << "shutdown exception: " << e << endl;
     }
 
 }
 
 int * controller::readMessage() {
     try{
-        ///recv(clientSocketHandle,&buffer,32,MSG_PEEK);
+        recv(clientSocketHandle,&buffer,32,MSG_WAITALL;
     }catch (string &e){
         cout<<"recv exception: "<<e<<endl;
     }
