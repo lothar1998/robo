@@ -80,7 +80,7 @@ void controller::run() {
 
     do{
         cout<<"buffer: "<<buffer<<endl;
-        readMessage();
+        cout<<"READ MESSAGE: "<<readMessage()<<endl;
         //TODO check propriety of message
 
         takeAction();
