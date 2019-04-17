@@ -84,7 +84,8 @@ void controller::run() {
 
     do{
         cout<<"buffer: "<<buffer<<endl;
-        cout<<"READ MESSAGE: "<<std::bitset<32>(*(readMessage()))<<endl;
+        bitset<32> a(*(readMessage()));
+        cout<<"READ MESSAGE: "<<a<<endl;
         //TODO check propriety of message
 
         takeAction();
