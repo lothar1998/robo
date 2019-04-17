@@ -20,6 +20,7 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
 
     this->tasks = tasks;
     this->sizeTasks=sizeTasks;
+    this->buffer=-1;
 
     try {
         socketHandle=socket(domain,type,protocol);
