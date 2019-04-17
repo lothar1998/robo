@@ -81,6 +81,7 @@ void controller::takeAction() {
         tasks[i]->takeAction(buffer);
         cout<<"action loc end: "<<tasks[i]<<endl;
     }
+    cout<<"action loc outing of takeAction: "<<tasks<<endl;
 }
 
 void controller::run() {
