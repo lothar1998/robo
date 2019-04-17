@@ -79,6 +79,7 @@ void controller::run() {
     int i=2;
 
     do{
+        cout<<"buffer: "<<buffer<<endl;
         readMessage();
         //TODO check propriety of message
 
