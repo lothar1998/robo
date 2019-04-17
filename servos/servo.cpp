@@ -52,7 +52,7 @@ void servo::setPWM( unsigned int on, unsigned int off) {
 }
 
 bool servo::setServoAngle(unsigned int angle) {
-    std::cout<<"servoAngle";
+    std::cout<<"servoAngle"<<std::endl;
     if(angle>=0&&angle<=360) {
         this->setPWM(0, angle + 140);
         return true;
@@ -74,6 +74,7 @@ bool servo::setServoMax() {
 }
 
 void servo::takeAction(const unsigned int command){
+    std::cout<<command<<std::endl;
     if(((command)>>28u)==0x0)
         if((((command)>>24u)&0xFu)==(unsigned int)ch){
             switch(((command)>>16u)&0xFFu){
