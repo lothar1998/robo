@@ -5,6 +5,7 @@
 #include "controller.h"
 #include "action_interface/action.h"
 #include <sys/socket.h>
+#include <unistd.h>
 #include <arpa/inet.h>
 #include <errno.h>
 #include <iostream>
@@ -60,7 +61,7 @@ controller::~controller() {
 
 int * controller::readMessage() {
     try{
-        recv(clientSocketHandle,&buffer,32,MSG_PEEK);
+        read(clientSocketHandle,&buffer,32);
     }catch (string &e){
         cout<<"recv exception: "<<e<<endl;
     }
