@@ -30,7 +30,7 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
     address.sin_port=htons(port);
 
     try{
-        bind(socketHandle,(const struct sockaddr_int *)&address,sizeof(address));
+        bind(socketHandle,(struct sockaddr_int *)&address,sizeof(address));
     }catch (string &e){
         cout<<"bind exception: "<<e<<endl;
     }
