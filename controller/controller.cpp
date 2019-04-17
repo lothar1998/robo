@@ -21,7 +21,7 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
 
     try {
         socketHandle=socket(domain,type,protocol);
-    }catch (string e) {
+    }catch (string &e) {
         cout<<"socket creation exception: "<<e<<endl;
     }
 
@@ -30,21 +30,21 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
     address.sin_port=htons(port);
 
     try{
-        bind(socketHandle,(struct sockaddr_int *)&address,sizeof(address));
-    }catch (string e){
+        bind(socketHandle,(const struct sockaddr_int *)&address,sizeof(address));
+    }catch (string &e){
         cout<<"bind exception: "<<e<<endl;
     }
 
 
     try {
         listen(socketHandle,1);
-    }catch (string e){
+    }catch (string &e){
         cout<<"listen exception: "<<e<<endl;
     }
 
     try{
         clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize);
-    }catch (string e){
+    }catch (string &e){
         cout<<"accept exception: "<<e<<endl;
     }
 }
@@ -52,7 +52,7 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
 controller::~controller() {
     try {
         shutdown(socketHandle,SHUT_RDWR);
-    }catch (string e){
+    }catch (string &e){
         cout<<"shutdown exception: "<<e<<endl;
     }
 
@@ -61,7 +61,7 @@ controller::~controller() {
 int * controller::readMessage() {
     try{
         recv(clientSocketHandle,&buffer,32,MSG_WAITALL);
-    }catch (string e){
+    }catch (string &e){
         cout<<"recv exception: "<<e<<endl;
     }
 
