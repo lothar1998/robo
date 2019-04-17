@@ -37,19 +37,6 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
     }catch (string &e){
         cout<<"bind exception: "<<e<<endl;
     }
-
-
-    try {
-        listen(socketHandle,1);
-    }catch (string &e){
-        cout<<"listen exception: "<<e<<endl;
-    }
-
-    try{
-        clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize);
-    }catch (string &e){
-        cout<<"accept exception: "<<e<<endl;
-    }
 }
 
 controller::~controller() {
@@ -86,6 +73,20 @@ void controller::takeAction() {
 }
 
 void controller::run() {
+
+    try {
+        listen(socketHandle,1);
+    }catch (string &e){
+        cout<<"listen exception: "<<e<<endl;
+    }
+
+    try{
+        clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize);
+    }catch (string &e){
+        cout<<"accept exception: "<<e<<endl;
+    }
+
+
     int i=1;
 
     do{
