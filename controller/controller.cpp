@@ -50,7 +50,7 @@ controller::~controller() {
 
 int * controller::readMessage() {
     try{
-        //recv(clientSocketHandle,&buffer,32,MSG_PEEK);
+        ///recv(clientSocketHandle,&buffer,32,MSG_PEEK);
     }catch (string &e){
         cout<<"recv exception: "<<e<<endl;
     }
