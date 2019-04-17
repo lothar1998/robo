@@ -72,8 +72,11 @@ int * controller::readMessage() {
 
 
 void controller::takeAction() {
-    for(int i=0;i<sizeTasks;i++)
+    cout<<"Starting taking action"<<endl;
+    for(int i=0;i<sizeTasks;i++) {
+        cout<<"action "<<i<<endl;
         tasks[i]->takeAction(buffer);
+    }
 }
 
 void controller::run() {
