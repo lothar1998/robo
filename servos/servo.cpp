@@ -62,14 +62,17 @@ bool servo::setServoAngle(unsigned int angle) {
 }
 
 bool servo::setServoMin() {
+    std::cout<<"setMin"<<std::endl;
     return this->setServoAngle(0);
 }
 
 bool servo::setServoMid() {
+    std::cout<<"setMid"<<std::endl;
     return this->setServoAngle(180);
 }
 
 bool servo::setServoMax() {
+    std::cout<<"setMax"<<std::endl;
     return this->setServoAngle(360);
 }
 
