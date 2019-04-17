@@ -77,6 +77,7 @@ void controller::takeAction() {
     cout<<"Starting taking action"<<endl;
     for(int i=0;i<sizeTasks;i++) {
         cout<<"action "<<i<<endl;
+        cout<<"action loc: "<<tasks[i]<<endl;
         tasks[i]->takeAction(buffer);
     }
 }
