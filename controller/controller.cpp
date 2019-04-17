@@ -80,9 +80,10 @@ void controller::run() {
 
     do{
         readMessage();
-        buffer=-1;
         //TODO check propriety of message
 
         takeAction();
+
+        buffer=-1;
     }while(i--); //TODO stop condition
 }
