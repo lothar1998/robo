@@ -80,6 +80,7 @@ void controller::run() {
 
     do{
         readMessage();
+        buffer=-1;
         //TODO check propriety of message
 
         takeAction();
