@@ -106,5 +106,5 @@ void controller::run() {
         takeAction();
        // cout<<"loc of task array in run after action: "<<*tasks<<endl;
         buffer=-1;
-    }while(i--); //TODO stop condition
+    }while(true); //TODO stop condition
 }
