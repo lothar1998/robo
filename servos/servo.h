@@ -5,7 +5,9 @@
 #ifndef ROBO1_SERVO_H
 #define ROBO1_SERVO_H
 
-class servo {
+#include <action_interface/action.h>
+
+class servo: public action {
 
 public:
     typedef unsigned int reg;
@@ -29,12 +31,14 @@ public:
         CH15 = 15
     };
 
-    servo(channel, unsigned int, unsigned int  = 0x40);
+    servo(channel, unsigned int = 50, unsigned int  = 0x40);
 
     bool setServoAngle(unsigned int);
     bool setServoMin();
     bool setServoMid();
     bool setServoMax();
+
+    void takeAction(unsigned int) override;
 
 
 private:
