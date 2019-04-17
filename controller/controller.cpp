@@ -75,13 +75,14 @@ int * controller::readMessage() {
 
 void controller::takeAction() {
     cout<<"Starting taking action"<<endl;
+    cout<<"starting loc array: "<<*tasks<<endl;
     for(int i=0;i<sizeTasks;i++) {
         cout<<"action "<<i<<endl;
         cout<<"action loc: "<<tasks[i]<<endl;
         tasks[i]->takeAction(buffer);
         cout<<"action loc end: "<<tasks[i]<<endl;
     }
-    cout<<"action loc outing of takeAction: "<<tasks<<endl;
+    cout<<"action loc outing of takeAction: "<<*tasks<<endl;
 }
 
 void controller::run() {
