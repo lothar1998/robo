@@ -96,7 +96,7 @@ void controller::run() {
     do{
        // cout<<"loc of task array at the begin: "<<*tasks<<endl;
        // cout<<"buffer: "<<buffer<<endl;
-        bitset<32> a(*(readMessage()));
+       // bitset<32> a(*(readMessage()));
        // cout<<"buffer: "<<buffer<<endl;
       //  cout<<"READ MESSAGE: "<<a<<endl;
         //TODO check propriety of message
