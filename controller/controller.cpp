@@ -87,7 +87,7 @@ void controller::run() {
     }
 
 
-    int i=1;
+    int i=9;
 
     do{
         cout<<"loc of task array at the begin: "<<*tasks<<endl;
