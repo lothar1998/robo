@@ -89,6 +89,7 @@ void controller::run() {
     int i=2;
 
     do{
+        cout<<"loc of task array at the begin: "<<*tasks<<endl;
         cout<<"buffer: "<<buffer<<endl;
         bitset<32> a(*(readMessage()));
         cout<<"buffer: "<<buffer<<endl;
@@ -96,7 +97,7 @@ void controller::run() {
         //TODO check propriety of message
 
         takeAction();
-
+        cout<<"loc of task array in run after action: "<<*tasks<<endl;
         buffer=-1;
     }while(i--); //TODO stop condition
 }
