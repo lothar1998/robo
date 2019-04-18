@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <bitset>
+#define STOP_CONDITION 0xFFFFFFFF
 
 
 using namespace std;
@@ -77,5 +78,5 @@ void controller::run() {
         std::bitset<32>a(buffer);
         cout<<a<<endl;
 
-    }while(buffer==0xFFFFFFFF); //TODO stop condition
+    }while(buffer!=STOP_CONDITION); //TODO stop condition
 }
