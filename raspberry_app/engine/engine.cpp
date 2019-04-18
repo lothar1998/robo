@@ -4,6 +4,7 @@
 
 #include "engine.h"
 #include <wiringPiI2C.h>
+#include <wiringPi.h>
 #include <cmath>
 
 engine::engine(engine::channel ch, unsigned int frequency, unsigned int address):ch(ch),frequency(frequency),address(address){
