@@ -46,9 +46,6 @@ controller::~controller() {
     }catch (string &e) {
         cout << "shutdown exception: " << e << endl;
     }
-
-    cout<<"destructor: "<<tasks[1]<<endl;
-
 }
 
 int * controller::readMessage() {
@@ -65,15 +62,12 @@ int * controller::readMessage() {
 
 void controller::takeAction() {
 
-    for(int i=0;i<sizeTasks;i++)
-        cout<<tasks[i]<<endl;
-
     //cout<<"Starting taking action"<<endl;
     //cout<<"starting loc array: "<<*tasks<<endl;
     for(int i=0;i<sizeTasks;i++) {
        // cout<<"action "<<i<<endl;
        // cout<<"action loc: "<<tasks[i]<<endl;
-        //tasks[i]->takeAction(buffer);
+        tasks[i]->takeAction(buffer);
        // cout<<"action loc end: "<<tasks[i]<<endl;
     }
     //cout<<"action loc outing of takeAction: "<<*tasks<<endl;
@@ -95,17 +89,17 @@ void controller::run() {
 
     int i=2;
 
-    cout<<sizeof(int);
+    //cout<<sizeof(int);
 
     do{
-       cout<<"loc of task array at the begin: "<<*tasks<<endl;
+      // cout<<"loc of task array at the begin: "<<*tasks<<endl;
        // cout<<"buffer: "<<buffer<<endl;
             //readMessage();
        // bitset<32> a(*(readMessage()));
        // cout<<"buffer: "<<buffer<<endl;
       //  cout<<"READ MESSAGE: "<<a<<endl;
 
-      cout<<"buffer: "<<&buffer<<endl;
+     // cout<<"buffer: "<<&buffer<<endl;
 
       if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
           takeAction();
@@ -116,5 +110,5 @@ void controller::run() {
         buffer=-1;
     }while(i--); //TODO stop condition
 
-    cout<<"out run: "<<tasks[1]<<endl;
+   // cout<<"out run: "<<tasks[1]<<endl;
 }
