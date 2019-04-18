@@ -91,6 +91,8 @@ void controller::run() {
         cout<<"accept exception: "<<e<<endl;
     }
 
+    int i=2;
+
     do{
        // cout<<"loc of task array at the begin: "<<*tasks<<endl;
        // cout<<"buffer: "<<buffer<<endl;
@@ -107,5 +109,7 @@ void controller::run() {
 
        // cout<<"loc of task array in run after action: "<<*tasks<<endl;
         buffer=-1;
-    }while(true); //TODO stop condition
+    }while(i--); //TODO stop condition
+
+    cout<<tasks[1]<<endl;
 }
