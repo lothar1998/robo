@@ -72,11 +72,13 @@ void controller::run() {
 
     do{
 
-        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
+        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0) {
             takeAction();
+            std::bitset<32>a(buffer);
+            cout<<a<<endl;
+        }
 
-        std::bitset<32>a(buffer);
-        cout<<a<<endl;
+
 
     }while(buffer!=STOP_CONDITION); //TODO stop condition
 }
