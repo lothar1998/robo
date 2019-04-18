@@ -95,7 +95,7 @@ void controller::run() {
 
     int i=2;
 
-    cout<<<<sizeof(int);
+    cout<<sizeof(int);
 
     do{
        cout<<"loc of task array at the begin: "<<*tasks<<endl;
