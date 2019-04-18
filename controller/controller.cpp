@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <iostream>
 #include <cerrno>
+#include <cstring>
 #define STOP_CONDITION 0xFFFFFFFF
 
 
