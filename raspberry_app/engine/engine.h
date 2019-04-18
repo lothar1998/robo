@@ -13,8 +13,8 @@ public:
     typedef unsigned int speed;
 
     enum channel{
-        CH1 0;
-        CH2 3;
+        CH1 = 0,
+        CH2 = 3
     };
 
     enum direction{
