@@ -8,8 +8,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string>
-#include "servos/servo.h"
-#include "action_interface/action.h"
+#include "raspberry_app/servos/servo.h"
+#include "raspberry_app/action_interface/action.h"
 
 class controller {
 public:
