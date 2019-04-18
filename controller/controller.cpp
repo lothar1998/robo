@@ -48,18 +48,6 @@ controller::~controller() {
     }
 }
 
-int * controller::readMessage() {
-    try{
-        recv(clientSocketHandle,&buffer,sizeof(buffer),0);
-    }catch (string &e){
-        cout<<"recv exception: "<<e<<endl;
-    }
-
-    return &buffer;
-}
-
-
-
 void controller::takeAction() {
 
     for(int i=0;i<sizeTasks;i++)
@@ -80,17 +68,14 @@ void controller::run() {
         cout<<"accept exception: "<<e<<endl;
     }
 
-    int i=2;
 
     do{
 
-      if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
-          takeAction();
-        //TODO check propriety of message
+        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
+            takeAction();
 
         std::bitset<32>a(buffer);
         cout<<a<<endl;
 
-        buffer=-1;
-    }while(i--); //TODO stop condition
+    }while(buffer==0xFFFFFFFF); //TODO stop condition
 }

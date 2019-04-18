@@ -34,7 +34,6 @@ private:
 
     int buffer;
 
-    int * readMessage();
     void takeAction();
 
 

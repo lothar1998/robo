@@ -77,7 +77,7 @@ bool servo::setServoMax() {
 }
 
 void servo::takeAction(const unsigned int command){
-    std::cout<<"command: "<<command<<std::endl;
+
     if(((command)>>28u)==0x0)
         if((((command)>>24u)&0xFu)==(unsigned int)ch){
             switch(((command)>>16u)&0xFFu){
