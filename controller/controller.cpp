@@ -70,7 +70,7 @@ void controller::takeAction() {
     for(int i=0;i<sizeTasks;i++) {
        // cout<<"action "<<i<<endl;
        // cout<<"action loc: "<<tasks[i]<<endl;
-        //tasks[i]->takeAction(buffer);
+        tasks[i]->takeAction(buffer);
        // cout<<"action loc end: "<<tasks[i]<<endl;
     }
     //cout<<"action loc outing of takeAction: "<<*tasks<<endl;
