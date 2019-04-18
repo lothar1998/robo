@@ -7,10 +7,8 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <arpa/inet.h>
-#include <errno.h>
 #include <iostream>
-#include <string>
-#include <bitset>
+#include <cerrno>
 #define STOP_CONDITION 0xFFFFFFFF
 
 
@@ -23,30 +21,29 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
     this->sizeTasks=sizeTasks;
     this->buffer=-1;
 
-    try {
-        socketHandle=socket(domain,type,protocol);
-    }catch (string &e) {
-        cout<<"socket creation exception: "<<e<<endl;
-    }
+
+    if((socketHandle=socket(domain,type,protocol))<0)
+        cout<<strerror(errno);
+
 
     address.sin_family = domain;
     inet_pton(domain,ip_addr.c_str(),&address.sin_addr);
     address.sin_port=htons(port);
 
-    try{
-        bind(socketHandle,(struct sockaddr *)&address,sizeof(address));
-    }catch (string &e){
-        cout<<"bind exception: "<<e<<endl;
-    }
+
+    if((bind(socketHandle,(struct sockaddr *)&address,sizeof(address)))<0)
+        cout<<strerror(errno);
+
 }
 
 controller::~controller() {
-    try {
-        shutdown(clientSocketHandle,SHUT_RDWR);
-        shutdown(socketHandle,SHUT_RDWR);
-    }catch (string &e) {
-        cout << "shutdown exception: " << e << endl;
-    }
+
+    if(shutdown(clientSocketHandle,SHUT_RDWR)<0)
+        cout<<strerror(errno);
+
+    if(shutdown(socketHandle,SHUT_RDWR)<0)
+        cout<<strerror(errno);
+
 }
 
 void controller::takeAction() {
@@ -57,28 +54,20 @@ void controller::takeAction() {
 
 void controller::run() {
 
-    try {
-        listen(socketHandle,1);
-    }catch (string &e){
-        cout<<"listen exception: "<<e<<endl;
-    }
 
-    try{
-        clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize);
-    }catch (string &e){
-        cout<<"accept exception: "<<e<<endl;
-    }
+    if(listen(socketHandle,1)<0)
+        cout<<strerror(errno);
+
+
+
+    if((clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize))<0)
+        cout<<strerror(errno);
 
 
     do{
 
-        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0) {
+        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
             takeAction();
-            std::bitset<32>a(buffer);
-            cout<<a<<endl;
-        }
 
-
-
-    }while(buffer!=STOP_CONDITION); //TODO stop condition
+    }while(buffer!=STOP_CONDITION);
 }
