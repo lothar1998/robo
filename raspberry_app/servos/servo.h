@@ -10,7 +10,6 @@
 class servo: public action {
 
 public:
-    typedef unsigned int reg;
 
     enum channel{
         CH0 = 0,
@@ -60,12 +59,11 @@ private:
 
     int bus;
     unsigned int address;
-    unsigned int mode;
     channel ch;
     unsigned int frequency;
 
-    void write(reg,unsigned int);
-    unsigned int read(reg);
+    void write(unsigned int,unsigned int);
+    unsigned int read(unsigned int);
     void setPWMFreq(unsigned int);
     void setPWM(unsigned int, unsigned int);
 };

@@ -3,72 +3,104 @@
 //
 
 #include "engine.h"
-#include <wiringPi.h>
+#include <wiringPiI2C.h>
+#include <cmath>
 
-engine::engine(){
-
+engine::engine(engine::channel ch, unsigned int frequency, unsigned int address):ch(ch),frequency(frequency),address(address){
+    bus=wiringPiI2CSetup(address);
+    this->write(__MODE1,0x00);
+    this->setPWMFreq(frequency);
 }
 
-engine::engine(pwmPin pwmPinNumber,enginePin enginePin1, enginePin enginePin2):pwmPinNumber(pwmPinNumber),enginePinNumber1(enginePin1),enginePinNumber2(enginePin2){
-    pinMode(pwmPinNumber,PWM_OUTPUT);
-    pinMode(enginePin1,OUTPUT);
-    pinMode(enginePin2,OUTPUT);
+void engine::write(unsigned int reg, unsigned int value) {
+    wiringPiI2CWriteReg8(bus,reg,value);
 }
 
-engine::engine(const engine & A){
-    this->pwmPinNumber=A.pwmPinNumber;
-    this->enginePinNumber1=A.enginePinNumber1;
-    this->enginePinNumber2=A.enginePinNumber2;
+unsigned int engine::read(unsigned int reg) {
+    return wiringPiI2CReadReg8(bus,reg);
 }
 
-void engine::stop() {
-    digitalWrite(enginePinNumber1,LOW);
-    digitalWrite(enginePinNumber2,LOW);
-    pwmWrite(pwmPinNumber,0);
+void engine::setPWMFreq(unsigned int frequency) {
+    float prescaleval = 25000000;
+    prescaleval /= 4096.0;
+    prescaleval /= float(frequency);
+    prescaleval -= 1.0;
+
+    int prescale = floor(prescaleval + 0.5);
+
+    unsigned int old_mode = this->read(__MODE1);
+    unsigned int new_mode = (old_mode & 0x7Fu) | 0x10u;
+
+    this->write(__MODE1, new_mode);
+    this->write(__PRESCALE, prescale);
+    this->write(__MODE1, old_mode | 0x80u);
 }
 
-void engine::enable_engine(engine::direction dir, engine::customSpeed engineSpeed, engine::time runtime) {
-    if(dir==FORWARD){
-        digitalWrite(enginePinNumber1,HIGH);
-        digitalWrite(enginePinNumber2,LOW);
+void engine::setPWM(unsigned int ch, unsigned int on, unsigned int off) {
+    this->write(__LED0_ON_L+4*ch, on & 0xFFu);
+    this->write(__LED0_OFF_H+4*ch, on >> 8u);
+    this->write(__LED0_OFF_L+4*ch, off & 0xFFu);
+    this->write(__LED0_OFF_H+4*ch, off >> 8u);
+}
+
+bool engine::startEngine(engine::direction dir, engine::speed speed, engine::runtime time) {
+
+    if(speed>=0&&speed<=4095) {
+        this->setPWM(ch, 0, speed);
+
+        if (dir == FORWARD) {
+            this->setPWM(ch + 1, 0, 0);
+            this->setPWM(ch + 2, 0, 4095);
+        } else {
+            this->setPWM(ch + 1, 0, 4095);
+            this->setPWM(ch + 2, 0, 0);
+        }
+
+        if (time > 0) {
+            delay(time);
+            this->stopEngine();
+        }
+
+        return true;
     }
-    else{
-        digitalWrite(enginePinNumber1,LOW);
-        digitalWrite(enginePinNumber2,HIGH);
-    }
-
-    if(engineSpeed>0)
-        pwmWrite(pwmPinNumber,engineSpeed);
     else
-        pwmWrite(pwmPinNumber,512);
-
-    if(runtime>0){
-        delay(runtime);
-        this->stop();
-    }
+        return false;
 }
 
-void engine::run(engine::direction dir) {
-
-    enable_engine(dir,0,0);
+bool engine::startEngine(engine::direction dir, engine::speed speed) {
+    return this->startEngine(dir,speed,0);
 }
 
-void engine::run(engine::direction dir, engine::speed speedOfEngine) {
-
-    enable_engine(dir,speedOfEngine,0);
+bool engine::startEngineMin(engine::direction dir) {
+    return this->startEngine(dir,engine::speedLevel::SLOW,0);
 }
 
-void engine::run(engine::direction dir, engine::customSpeed speedOfEngine) {
-
-    enable_engine(dir,speedOfEngine,0);
+bool engine::startEngineMin(engine::direction dir, engine::runtime time) {
+    return this->startEngine(dir,engine::speedLevel::SLOW,time);
 }
 
-void engine::run(engine::direction dir, engine::speed speedOfEngine, engine::time runtime) {
-
-    enable_engine(dir,speedOfEngine,runtime);
+bool engine::startEngineMid(engine::direction dir) {
+    return this->startEngine(dir,engine::speedLevel::MEDIUM,0);
 }
 
-void engine::run(engine::direction dir, engine::customSpeed speedOfEngine, engine::time runtime) {
+bool engine::startEngineMid(engine::direction dir, engine::runtime time) {
+    return this->startEngine(dir,engine::speedLevel::MEDIUM,time);
+}
 
-    enable_engine(dir,speedOfEngine,runtime);
+bool engine::startEngineMax(engine::direction dir) {
+    return this->startEngine(dir,engine::speedLevel::FAST,0);
+}
+
+bool engine::startEngineMax(engine::direction dir, engine::runtime time) {
+    return this->startEngine(dir,engine::speedLevel::FAST,time);
+}
+
+void engine::stopEngine() {
+    this->setPWM(ch,0,0);
+    this->setPWM(ch+1,0,0);
+    this->setPWM(ch+2,0,0);
+}
+
+void engine::takeAction(unsigned int command) {
+
 }
