@@ -14,7 +14,7 @@ public:
 
     enum channel{
         CH1 = 0,
-        CH2 = 3
+        CH2 = 5
     };
 
     enum direction{

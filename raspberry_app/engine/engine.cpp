@@ -50,11 +50,22 @@ bool engine::startEngine(engine::direction dir, engine::speed speed, engine::run
         this->setPWM(ch, 0, speed);
 
         if (dir == FORWARD) {
-            this->setPWM(ch + 1, 0, 0);
-            this->setPWM(ch + 2, 0, 4095);
+            if(ch==CH1){
+                this->setPWM(1, 0, 0);
+                this->setPWM(2, 0, 4095);
+            } else{
+                this->setPWM(3, 0, 0);
+                this->setPWM(4, 0, 4095);
+            }
+
         } else {
-            this->setPWM(ch + 1, 0, 4095);
-            this->setPWM(ch + 2, 0, 0);
+            if(ch==CH1){
+                this->setPWM(1, 0, 4095);
+                this->setPWM(2, 0, 0);
+            } else{
+                this->setPWM(3, 0, 4095);
+                this->setPWM(4, 0, 0);
+            }
         }
 
         if (time > 0) {
