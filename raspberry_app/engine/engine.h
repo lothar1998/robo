@@ -18,8 +18,8 @@ public:
     };
 
     enum direction{
-        FORWARD = 1,
-        BACKWARD = 0
+        FORWARD = 0,
+        BACKWARD = 1
     };
 
 
