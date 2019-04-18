@@ -41,7 +41,6 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
 
 controller::~controller() {
     try {
-        shutdown(clientSocketHandle,SHUT_RDWR);
         shutdown(socketHandle,SHUT_RDWR);
     }catch (string &e) {
         cout << "shutdown exception: " << e << endl;
@@ -81,21 +80,24 @@ void controller::takeAction() {
 
 void controller::run() {
 
-    try {
-        listen(socketHandle,1);
-    }catch (string &e){
-        cout<<"listen exception: "<<e<<endl;
-    }
 
-    try{
-        clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize);
-    }catch (string &e){
-        cout<<"accept exception: "<<e<<endl;
-    }
 
     int i=2;
 
     do{
+
+        try {
+            listen(socketHandle,1);
+        }catch (string &e){
+            cout<<"listen exception: "<<e<<endl;
+        }
+
+        try{
+            clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize);
+        }catch (string &e){
+            cout<<"accept exception: "<<e<<endl;
+        }
+
        // cout<<"loc of task array at the begin: "<<*tasks<<endl;
        // cout<<"buffer: "<<buffer<<endl;
             //readMessage();
@@ -111,6 +113,8 @@ void controller::run() {
 
        // cout<<"loc of task array in run after action: "<<*tasks<<endl;
         buffer=-1;
+
+        shutdown(clientSocketHandle,SHUT_RDWR);
     }while(i--); //TODO stop condition
 
     cout<<"out run: "<<tasks[1]<<endl;
