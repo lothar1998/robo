@@ -95,6 +95,8 @@ void controller::run() {
 
     int i=2;
 
+    cout<<<<sizeof(int);
+
     do{
        cout<<"loc of task array at the begin: "<<*tasks<<endl;
        // cout<<"buffer: "<<buffer<<endl;
@@ -105,7 +107,7 @@ void controller::run() {
 
       cout<<"buffer: "<<&buffer<<endl;
 
-      if(recv(clientSocketHandle,&buffer,32,0)>0)
+      if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
           takeAction();
         //TODO check propriety of message
 
