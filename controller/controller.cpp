@@ -94,13 +94,17 @@ void controller::run() {
     do{
        // cout<<"loc of task array at the begin: "<<*tasks<<endl;
        // cout<<"buffer: "<<buffer<<endl;
-            readMessage();
+            //readMessage();
        // bitset<32> a(*(readMessage()));
        // cout<<"buffer: "<<buffer<<endl;
       //  cout<<"READ MESSAGE: "<<a<<endl;
+
+
+      if(recv(clientSocketHandle,&buffer,32,0)>=0)
+          takeAction();
         //TODO check propriety of message
 
-        takeAction();
+
        // cout<<"loc of task array in run after action: "<<*tasks<<endl;
         buffer=-1;
     }while(true); //TODO stop condition
