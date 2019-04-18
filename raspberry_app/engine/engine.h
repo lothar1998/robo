@@ -60,17 +60,7 @@ private:
         __ALLLED_OFF_H       = 0xFD
     };
 
-    enum GPIO{
-        PWMA = 0,
-        AIN1 = 1,
-        AIN2 = 2,
-        PWMB = 3,
-        BIN1 = 4,
-        BIN2 = 5
-    };
-
     enum speedLevel{
-        STOP = 0,
         SLOW = 700,
         MEDIUM = 850,
         FAST = 1024
