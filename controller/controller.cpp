@@ -47,6 +47,8 @@ controller::~controller() {
         cout << "shutdown exception: " << e << endl;
     }
 
+    cout<<"destructor: "<<tasks[1]<<endl;
+
 }
 
 int * controller::readMessage() {
@@ -111,5 +113,5 @@ void controller::run() {
         buffer=-1;
     }while(i--); //TODO stop condition
 
-    cout<<tasks[1]<<endl;
+    cout<<"out run: "<<tasks[1]<<endl;
 }
