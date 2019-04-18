@@ -96,14 +96,14 @@ void controller::run() {
     int i=2;
 
     do{
-       // cout<<"loc of task array at the begin: "<<*tasks<<endl;
+       cout<<"loc of task array at the begin: "<<*tasks<<endl;
        // cout<<"buffer: "<<buffer<<endl;
             //readMessage();
        // bitset<32> a(*(readMessage()));
        // cout<<"buffer: "<<buffer<<endl;
       //  cout<<"READ MESSAGE: "<<a<<endl;
 
-      cout<<&buffer<<endl;
+      cout<<"buffer: "<<&buffer<<endl;
 
       if(recv(clientSocketHandle,&buffer,32,0)>0)
           takeAction();
