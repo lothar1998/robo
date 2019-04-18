@@ -6,8 +6,7 @@
 #include <wiringPiI2C.h>
 #include <exception>
 #include <cmath>
-#include <iostream>
-#include <bitset>
+
 
 using namespace std;
 
@@ -53,7 +52,7 @@ void servo::setPWM( unsigned int on, unsigned int off) {
 }
 
 bool servo::setServoAngle(unsigned int angle) {
-    std::cout<<"servoAngle"<<std::endl;
+
     if(angle>=0&&angle<=360) {
         this->setPWM(0, angle + 140);
         return true;
@@ -63,23 +62,22 @@ bool servo::setServoAngle(unsigned int angle) {
 }
 
 bool servo::setServoMin() {
-    std::cout<<"setMin"<<std::endl;
+
     return this->setServoAngle(0);
 }
 
 bool servo::setServoMid() {
-    std::cout<<"setMid"<<std::endl;
+
     return this->setServoAngle(180);
 }
 
 bool servo::setServoMax() {
-    std::cout<<"setMax"<<std::endl;
+
     return this->setServoAngle(360);
 }
 
 void servo::takeAction(const unsigned int command){
-    std::bitset<32>a(command);
-    std::cout<<a<<std::endl;
+
     if(((command)>>28u)==0x0)
         if((((command)>>24u)&0x0Fu)==(unsigned int)ch){
             switch((((command)>>16u)&0x00FFu)){
