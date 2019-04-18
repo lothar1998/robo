@@ -7,6 +7,7 @@
 #include <exception>
 #include <cmath>
 #include <iostream>
+#include <bitset>
 
 using namespace std;
 
@@ -77,11 +78,12 @@ bool servo::setServoMax() {
 }
 
 void servo::takeAction(const unsigned int command){
-
+    std::bitset<32>a(command);
+    std::cout<<a<<std::endl;
     if(((command)>>28u)==0x0)
-        if((((command)>>24u)&0xFu)==(unsigned int)ch){
-            switch(((command)>>16u)&0xFFu){
-                case 0x00: this->setServoAngle(((command)&0xFFFFu));
+        if((((command)>>24u)&0x0Fu)==(unsigned int)ch){
+            switch((((command)>>16u)&0x00FFu)){
+                case 0x00: this->setServoAngle(((command)&0x0000FFFFu));
                     break;
                 case 0x01: this->setServoMin();
                     break;
