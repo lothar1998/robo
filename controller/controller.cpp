@@ -100,7 +100,7 @@ void controller::run() {
       //  cout<<"READ MESSAGE: "<<a<<endl;
 
 
-      if(recv(clientSocketHandle,&buffer,32,0)>=0)
+      if(recv(clientSocketHandle,&buffer,32,0)>0)
           takeAction();
         //TODO check propriety of message
 
