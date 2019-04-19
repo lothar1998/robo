@@ -106,8 +106,19 @@ bool engine::startEngineMax(engine::direction dir, engine::runtime time) {
     return this->startEngine(dir,engine::speedLevel::FAST,time);
 }
 
-void engine::stopEngine() {
+void engine::stopEngineImmediately() {
     this->setPWM(ch,0,0);
+}
+
+void engine::stopEngine(){
+    this->stopEngineImmediately();
+    if(ch==CH1){
+        this->setPWM(1,0,0);
+        this->setPWM(2,0,0);
+    } else{
+        this->setPWM(3,0,0);
+        this->setPWM(4,0,0);
+    }
 }
 
 void engine::takeAction(unsigned int command) {

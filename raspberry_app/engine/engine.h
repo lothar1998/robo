@@ -37,6 +37,7 @@ public:
     bool startEngineMax(direction);
     bool startEngineMax(direction,runtime);
 
+    void stopEngineImmediately();
     void stopEngine();
 
     void takeAction(unsigned int) override;
