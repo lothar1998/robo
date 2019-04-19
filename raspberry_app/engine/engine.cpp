@@ -57,7 +57,7 @@ bool engine::startEngine(engine::direction dir, engine::speed speed, engine::run
                 this->setPWM(3, 0, 0);
                 this->setPWM(4, 0, 4095);
             }
-        } else {
+        } else if(dir == BACKWARD){
             if(ch==CH1){
                 this->setPWM(1, 0, 4095);
                 this->setPWM(2, 0, 0);
