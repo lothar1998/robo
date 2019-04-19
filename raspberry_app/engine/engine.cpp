@@ -47,21 +47,23 @@ void engine::setPWM(unsigned int ch, unsigned int on, unsigned int off) {
 bool engine::startEngine(engine::direction dir, engine::speed speed, engine::runtime time) {
 
     if(speed>=0&&speed<=4095) {
-        this->setPWM(ch, 0, speed);
-
         if (dir == FORWARD) {
             if(ch==CH1){
+                this->setPWM(ch, 0, speed);
                 this->setPWM(1, 0, 0);
                 this->setPWM(2, 0, 4095);
             } else{
+                this->setPWM(ch, 0, speed);
                 this->setPWM(3, 0, 0);
                 this->setPWM(4, 0, 4095);
             }
         } else if(dir == BACKWARD){
             if(ch==CH1){
+                this->setPWM(ch, 0, speed);
                 this->setPWM(1, 0, 4095);
                 this->setPWM(2, 0, 0);
             } else{
+                this->setPWM(ch, 0, speed);
                 this->setPWM(3, 0, 4095);
                 this->setPWM(4, 0, 0);
             }
