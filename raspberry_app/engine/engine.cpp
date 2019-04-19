@@ -108,8 +108,6 @@ bool engine::startEngineMax(engine::direction dir, engine::runtime time) {
 
 void engine::stopEngine() {
     this->setPWM(ch,0,0);
-    this->setPWM(ch+1,0,0);
-    this->setPWM(ch+2,0,0);
 }
 
 void engine::takeAction(unsigned int command) {
