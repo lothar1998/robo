@@ -46,9 +46,12 @@ void engine::setPWM(unsigned int ch, unsigned int on, unsigned int off) {
 
 bool engine::startEngine(engine::direction dir, engine::speed speed, engine::runtime time) {
 
-    if(speed>=0&&speed<=4095) {
+    if(speed>=0&&speed<=100) {
+
+        speed=((speed*4096)/100)-1;
+
         if (dir == FORWARD) {
-            if(ch==CH1){
+            if(ch==CH0){
                 this->setPWM(ch, 0, speed);
                 this->setPWM(1, 0, 0);
                 this->setPWM(2, 0, 4095);
@@ -58,7 +61,7 @@ bool engine::startEngine(engine::direction dir, engine::speed speed, engine::run
                 this->setPWM(4, 0, 4095);
             }
         } else if(dir == BACKWARD){
-            if(ch==CH1){
+            if(ch==CH0){
                 this->setPWM(ch, 0, speed);
                 this->setPWM(1, 0, 4095);
                 this->setPWM(2, 0, 0);
@@ -113,7 +116,7 @@ void engine::stopEngineImmediately() {
 }
 
 void engine::stopEngine(){
-    if(ch==CH1){
+    if(ch==CH0){
         this->setPWM(ch,0,0);
         this->setPWM(1,0,0);
         this->setPWM(2,0,0);
@@ -126,4 +129,31 @@ void engine::stopEngine(){
 
 void engine::takeAction(unsigned int command) {
 
+    if(((command)>>28u)==0x1)
+        if((((command)>>24u)&0x0Fu)==(unsigned int)ch||((((command)>>24u)&0x0Fu)==(unsigned int)(ch-4))){
+            switch((((command)>>16u)&0x00FFu)){
+                case 0x00: this->startEngine((direction)((command)&0x00008000u),((command)&0x00007F00u));
+                    break;
+                case 0x01: this->startEngine((direction)((command)&0x00008000u),((command)&0x00007F00u),((command)&0x000000FFu));
+                    break;
+                case 0x02: this->startEngineMin((direction)((command)&0x00008000u));
+                    break;
+                case 0x03: this->startEngineMin((direction)((command)&0x00008000u),((command)&0x000000FFu));
+                    break;
+                case 0x04: this->startEngineMid((direction)((command)&0x00008000u));
+                    break;
+                case 0x05: this->startEngineMid((direction)((command)&0x00008000u),((command)&0x000000FFu));
+                    break;
+                case 0x06: this->startEngineMax((direction)((command)&0x00008000u));
+                    break;
+                case 0x07: this->startEngineMax((direction)((command)&0x00008000u),((command)&0x000000FFu));
+                    break;
+                case 0x08: this->stopEngineImmediately();
+                    break;
+                case 0x09: this->stopEngine();
+                    break;
+                default:
+                    break;
+            }
+        }
 }
