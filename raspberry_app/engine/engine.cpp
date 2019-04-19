@@ -46,9 +46,9 @@ void engine::setPWM(unsigned int ch, unsigned int on, unsigned int off) {
 
 bool engine::startEngine(engine::direction dir, engine::speed speed, engine::runtime time) {
 
-    speed=((speed*4096)/100)-1;
-
     if(speed>=0&&speed<=100) {
+
+        speed=((speed*4096)/100)-1;
 
         if (dir == FORWARD) {
             if(ch==CH0){
