@@ -111,11 +111,12 @@ void engine::stopEngineImmediately() {
 }
 
 void engine::stopEngine(){
-    this->stopEngineImmediately();
     if(ch==CH1){
+        this->setPWM(ch,0,0);
         this->setPWM(1,0,0);
         this->setPWM(2,0,0);
     } else{
+        this->setPWM(ch,0,0);
         this->setPWM(3,0,0);
         this->setPWM(4,0,0);
     }
