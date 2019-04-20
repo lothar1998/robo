@@ -132,21 +132,21 @@ void engine::takeAction(unsigned int command) {
     if(((command)>>28u)==0x1)
         if((((command)>>24u)&0x0Fu)==(unsigned int)ch||((((command)>>24u)&0x0Fu)==(unsigned int)(ch-4))){
             switch((((command)>>16u)&0x00FFu)){
-                case 0x00: this->startEngine((direction)((command)&0x00008000u),((command)&0x00007F00u));
+                case 0x00: this->startEngine((direction)((command>>15u)&0x1u),((command>>8u)&0x7Fu));
                     break;
-                case 0x01: this->startEngine((direction)((command)&0x00008000u),((command)&0x00007F00u),((command)&0x000000FFu));
+                case 0x01: this->startEngine((direction)((command>>15u)&0x1u),((command>>8u)&0x7Fu),((command)&0x000000FFu));
                     break;
-                case 0x02: this->startEngineMin((direction)((command)&0x00008000u));
+                case 0x02: this->startEngineMin((direction)((command>>15u)&0x1u));
                     break;
-                case 0x03: this->startEngineMin((direction)((command)&0x00008000u),((command)&0x000000FFu));
+                case 0x03: this->startEngineMin((direction)((command>>15u)&0x1u),((command)&0x000000FFu));
                     break;
-                case 0x04: this->startEngineMid((direction)((command)&0x00008000u));
+                case 0x04: this->startEngineMid((direction)((command>>15u)&0x1u));
                     break;
-                case 0x05: this->startEngineMid((direction)((command)&0x00008000u),((command)&0x000000FFu));
+                case 0x05: this->startEngineMid((direction)((command>>15u)&0x1u),((command)&0x000000FFu));
                     break;
-                case 0x06: this->startEngineMax((direction)((command)&0x00008000u));
+                case 0x06: this->startEngineMax((direction)((command>>15u)&0x1u));
                     break;
-                case 0x07: this->startEngineMax((direction)((command)&0x00008000u),((command)&0x000000FFu));
+                case 0x07: this->startEngineMax((direction)((command>>15u)&0x1u),((command)&0x000000FFu));
                     break;
                 case 0x08: this->stopEngineImmediately();
                     break;

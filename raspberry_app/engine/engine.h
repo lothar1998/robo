@@ -62,9 +62,9 @@ private:
     };
 
     enum speedLevel{
-        SLOW = 700,
-        MEDIUM = 850,
-        FAST = 1024
+        SLOW = 20,
+        MEDIUM = 50,
+        FAST = 100
     };
 
     int bus;

@@ -2,7 +2,7 @@
 // Created by Piotr Kuglin on 2019-04-15.
 //
 
-#include "raspberry_app/controller/controller.h"
+#include "controller.h"
 #include "raspberry_app/action_interface/action.h"
 #include <sys/socket.h>
 #include <unistd.h>
