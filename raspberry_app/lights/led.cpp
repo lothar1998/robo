@@ -19,5 +19,15 @@ void led::off(){
 }
 
 void led::takeAction(unsigned int command) {
-
+    if(((command)>>28u)==0x2)
+        if((((command)>>20u)&0x0FFu)==(unsigned int)num_pin){
+            switch((((command)>>16u)&0x000Fu)){
+                case 0x0: this->on();
+                    break;
+                case 0x1: this->off();
+                    break;
+                default:
+                    break;
+            }
+        }
 }
