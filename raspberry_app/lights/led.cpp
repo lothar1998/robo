@@ -6,7 +6,8 @@
 #include <wiringPi.h>
 
 led::led(led::pin pin):num_pin(pin) {
-
+    wiringPiSetup();
+    pinMode(num_pin, OUTPUT);
 }
 
 void led::on() {
