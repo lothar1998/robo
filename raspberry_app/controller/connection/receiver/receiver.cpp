@@ -59,8 +59,10 @@ void receiver::operator()() {
 
     do{
 
-        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
+        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0) {
+            cout << buffer << endl;
             (obj->*fun_ptr)(buffer);
+        }
 
     }while(buffer!=stopCondition);
 
