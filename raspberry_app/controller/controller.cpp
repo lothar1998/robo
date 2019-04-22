@@ -29,7 +29,10 @@ controller::~controller() {
 }
 
 void controller::operator()(){
-    receiver<int> recv(takeAction,(int)7777,port,ip_addr,domain,type,protocol);
+
+    auto ptr = &controller::takeAction;
+
+    receiver<int,controller> recv(ptr,(int)7777,port,ip_addr,domain,type,protocol);
     thread threadReceive(recv);
     threadReceive.join();
 }

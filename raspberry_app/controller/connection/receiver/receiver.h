@@ -10,10 +10,10 @@
 
 using namespace std;
 
-template <typename T>
+template <typename T,class B>
 class receiver {
 public:
-    receiver(void (*)(T),T,int,string = "127.0.0.1",int = AF_INET,int = SOCK_STREAM,int = 0);
+    receiver(void (B::*)(T),T,int,string = "127.0.0.1",int = AF_INET,int = SOCK_STREAM,int = 0);
     ~receiver();
     void operator()();
 

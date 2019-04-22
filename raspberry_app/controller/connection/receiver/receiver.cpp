@@ -10,8 +10,8 @@
 #include <cstring>
 #include <iostream>
 
-template <typename T>
-receiver<T>::receiver(void (*fun)(T), T stopCondition, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),socketHandle(0),clientAddress(0),clientAddressSize(0),clientSocketHandle(0) {
+template <typename T,class B>
+receiver<T,B>::receiver(void (B::*fun)(T), T stopCondition, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),socketHandle(0),clientAddress(0),clientAddressSize(0),clientSocketHandle(0) {
 
     if((socketHandle=socket(domain,type,protocol))<0)
         cout<<strerror(errno);
@@ -26,8 +26,8 @@ receiver<T>::receiver(void (*fun)(T), T stopCondition, int port, string ip_addr,
         cout<<strerror(errno);
 }
 
-template <typename T>
-receiver<T>::~receiver() {
+template <typename T,class B>
+receiver<T,B>::~receiver() {
     if(shutdown(clientSocketHandle,SHUT_RDWR)<0)
         cout<<strerror(errno);
 
@@ -35,8 +35,8 @@ receiver<T>::~receiver() {
         cout<<strerror(errno);
 }
 
-template <typename T>
-void receiver<T>::operator()() {
+template <typename T,class B>
+void receiver<T,B>::operator()() {
 
     if(listen(socketHandle,1)<0)
         cout<<strerror(errno);
