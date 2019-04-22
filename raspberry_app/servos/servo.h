@@ -5,9 +5,9 @@
 #ifndef ROBO1_SERVO_H
 #define ROBO1_SERVO_H
 
-#include <raspberry_app/action_interface/action.h>
+#include <raspberry_app/action_interface/setAction.h>
 
-class servo: public action {
+class servo: public setAction {
 
 public:
 
@@ -37,7 +37,7 @@ public:
     bool setServoMid();
     bool setServoMax();
 
-    void takeAction(unsigned int) override;
+    void takeSetAction(unsigned int) override;
 
 
 private:

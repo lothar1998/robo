@@ -3,7 +3,7 @@
 //
 
 #include "controller.h"
-#include "raspberry_app/action_interface/action.h"
+#include "raspberry_app/action_interface/setAction.h"
 #include <sys/socket.h>
 #include <unistd.h>
 #include <arpa/inet.h>
@@ -18,7 +18,7 @@
 using namespace std;
 
 
-controller::controller(action **tasks, size_t sizeTasks, unsigned int port, string ip_addr, int domain, int type, int protocol):tasks(tasks),sizeTasks(sizeTasks),port(port),ip_addr(ip_addr),domain(domain),type(type),protocol(protocol) {
+controller::controller(setAction **tasks, size_t sizeTasks, unsigned int port, string ip_addr, int domain, int type, int protocol):tasks(tasks),sizeTasks(sizeTasks),port(port),ip_addr(ip_addr),domain(domain),type(type),protocol(protocol) {
 
 }
 
@@ -34,6 +34,6 @@ void controller::operator()(){
 void controller::takeAction(int command) {
 
     for(int i=0;i<sizeTasks;i++)
-        (this->tasks)[i]->takeAction(command);
+        (this->tasks)[i]->takeSetAction(command);
 
 }

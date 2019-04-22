@@ -18,7 +18,7 @@ void led::off(){
     digitalWrite(num_pin,LOW);
 }
 
-void led::takeAction(unsigned int command) {
+void led::takeSetAction(unsigned int command) {
     if(((command)>>28u)==0x2)
         if((((command)>>20u)&0x0FFu)==(unsigned int)num_pin){
             switch((((command)>>16u)&0x000Fu)){

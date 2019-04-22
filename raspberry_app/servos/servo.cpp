@@ -72,7 +72,7 @@ bool servo::setServoMax() {
     return this->setServoAngle(360);
 }
 
-void servo::takeAction(const unsigned int command){
+void servo::takeSetAction(const unsigned int command){
 
     if(((command)>>28u)==0x0)
         if((((command)>>24u)&0x0Fu)==(unsigned int)ch){

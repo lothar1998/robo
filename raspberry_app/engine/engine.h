@@ -3,10 +3,10 @@
 //
 #ifndef ROBO1_ENGINE_H
 #define ROBO1_ENGINE_H
-#include "raspberry_app/action_interface/action.h"
+#include "raspberry_app/action_interface/setAction.h"
 
 
-class engine: public action{
+class engine: public setAction{
 public:
 
     typedef unsigned int runtime;
@@ -40,7 +40,7 @@ public:
     void stopEngineImmediately();
     void stopEngine();
 
-    void takeAction(unsigned int) override;
+    void takeSetAction(unsigned int) override;
 
 
 private:

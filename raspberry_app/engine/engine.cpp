@@ -127,7 +127,7 @@ void engine::stopEngine(){
     }
 }
 
-void engine::takeAction(unsigned int command) {
+void engine::takeSetAction(unsigned int command) {
 
     if(((command)>>28u)==0x1)
         if((((command)>>24u)&0x0Fu)==(unsigned int)ch||((((command)>>24u)&0x0Fu)==(unsigned int)(ch-4))){

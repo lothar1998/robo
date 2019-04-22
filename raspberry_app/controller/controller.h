@@ -9,11 +9,11 @@
 #include <netinet/in.h>
 #include <string>
 #include "raspberry_app/servos/servo.h"
-#include "raspberry_app/action_interface/action.h"
+#include "raspberry_app/action_interface/setAction.h"
 
 class controller {
 public:
-    controller(action **,size_t,unsigned int, std::string = "127.0.0.1", int = AF_INET,int = SOCK_STREAM,int = 0);
+    controller(setAction **,size_t,unsigned int, std::string = "127.0.0.1", int = AF_INET,int = SOCK_STREAM,int = 0);
 
     void operator()();
 
@@ -22,7 +22,7 @@ private:
 
     void takeAction(int);
 
-    action ** tasks;
+    setAction ** tasks;
     size_t sizeTasks;
 
     unsigned int port;

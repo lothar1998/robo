@@ -4,9 +4,9 @@
 
 #ifndef ROBO1_LED_H
 #define ROBO1_LED_H
-#include "raspberry_app/action_interface/action.h"
+#include "raspberry_app/action_interface/setAction.h"
 
-class led: public action {
+class led: public setAction {
 public:
     enum pin{
         PIN0 = 0,
@@ -46,7 +46,7 @@ public:
     void on();
     void off();
 
-    void takeAction(unsigned int) override ;
+    void takeSetAction(unsigned int) override ;
 
 private:
 
