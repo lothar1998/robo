@@ -41,7 +41,8 @@ void controller::operator()(){
 void controller::takeAction(int command) {
 
     cout<<"inside action: "<<command<<endl;
+    cout<<"sizeTask: "<<sizeTasks<<endl;
     for(int i=0;i<sizeTasks;i++)
-        tasks[i]->takeAction(command);
+        (this->tasks)[i]->takeAction(command);
 
 }
