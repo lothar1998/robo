@@ -33,7 +33,7 @@ void controller::operator()(){
     auto ptr = &controller::takeAction;
 
     receiver recv(this,ptr,(int)7777,port,ip_addr,domain,type,protocol);
-    thread threadReceive(recv);
+    thread threadReceive(std::ref(recv));
     threadReceive.join();
     cout<<"joined"<<endl;
 }
