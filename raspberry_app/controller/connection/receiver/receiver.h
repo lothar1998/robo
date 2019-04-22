@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string>
+#include "raspberry_app/controller/connection/receiver/receiver.cpp"
 
 
 using namespace std;
