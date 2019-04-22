@@ -45,10 +45,14 @@ void receiver::operator()() {
     if((clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize))<0)
         cout<<strerror(errno);
 
+    cout<<"accepted"<<endl;
+
     do{
 
         if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
             (obj->*fun_ptr)(buffer);
 
     }while(buffer!=stopCondition);
+
+    cout<<"ended"<<endl;
 }
