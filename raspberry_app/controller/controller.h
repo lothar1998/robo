@@ -21,16 +21,16 @@ public:
 
 private:
 
-    void takeAction(int);
+    static void takeAction(int);
 
-    action ** tasks;
-    size_t sizeTasks;
+    static action ** tasks;
+    static size_t sizeTasks;
 
-    unsigned int port;
-    std::string ip_addr;
-    int domain;
-    int type;
-    int protocol;
+    static unsigned int port;
+    static std::string ip_addr;
+    static int domain;
+    static int type;
+    static int protocol;
 
 
 };
