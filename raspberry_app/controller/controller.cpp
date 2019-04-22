@@ -22,24 +22,17 @@ controller::controller(action **tasks, size_t sizeTasks, unsigned int port, stri
 
 }
 
-controller::~controller() {
-
-
-
-}
 
 void controller::operator()(){
 
     receiver<int,controller> recv(this,&controller::takeAction,(int)STOP_CONDITION,port,ip_addr,domain,type,protocol);
     thread threadReceive(std::ref(recv));
     threadReceive.join();
-    cout<<"joined"<<endl;
+
 }
 
 void controller::takeAction(int command) {
 
-    cout<<"inside action: "<<command<<endl;
-    cout<<"sizeTask: "<<sizeTasks<<endl;
     for(int i=0;i<sizeTasks;i++)
         (this->tasks)[i]->takeAction(command);
 

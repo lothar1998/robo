@@ -14,7 +14,6 @@
 class controller {
 public:
     controller(action **,size_t,unsigned int, std::string = "127.0.0.1", int = AF_INET,int = SOCK_STREAM,int = 0);
-    ~controller();
 
     void operator()();
 
