@@ -25,6 +25,8 @@ receiver::receiver(controller * obj, void (controller::*fun)(int), int stopCondi
 
     if((bind(socketHandle,(struct sockaddr *)&address,sizeof(address)))<0)
         cout<<strerror(errno);
+
+    cout<<"binded"<<endl;
 }
 
 receiver::~receiver() {
