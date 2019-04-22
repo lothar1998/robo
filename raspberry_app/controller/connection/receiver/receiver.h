@@ -13,8 +13,6 @@
 #include <cstring>
 #include <iostream>
 
-
-
 using namespace std;
 
 template <typename T, class B>
@@ -77,29 +75,29 @@ receiver<T,B>::~receiver() {
 template <typename T, class B>
 void receiver<T,B>::operator()() {
 
-    cout<<socketHandle<<endl;
+    cout << socketHandle << endl;
 
-    if(listen(socketHandle,1)<0)
-        cout<<strerror(errno);
+    if (listen(socketHandle, 1) < 0)
+        cout << strerror(errno);
 
 
+    if ((clientSocketHandle = accept(socketHandle, (struct sockaddr *) &clientAddress,
+                                     (socklen_t *) &clientAddressSize)) < 0)
+        cout << strerror(errno);
 
-    if((clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize))<0)
-        cout<<strerror(errno);
+    cout << "accepted" << endl;
 
-    cout<<"accepted"<<endl;
+    do {
 
-    do{
-
-        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0) {
+        if (recv(clientSocketHandle, &buffer, sizeof(int), 0) > 0) {
             cout << buffer << endl;
             (obj->*fun_ptr)(buffer);
         }
 
-    }while(buffer!=stopCondition);
+    } while (buffer != stopCondition);
 
-    cout<<"ended"<<endl;
-
+    cout << "ended" << endl;
+}
 
 
 #endif //ROBO1_RECEIVER_H
