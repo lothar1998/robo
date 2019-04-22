@@ -10,8 +10,8 @@
 #include <cstring>
 #include <iostream>
 
-template <typename T,class B>
-receiver<T,B>::receiver(void (B::*fun)(T), T stopCondition, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),socketHandle(0),clientAddress(0),clientAddressSize(0),clientSocketHandle(0) {
+
+receiver::receiver(controller * obj, void (controller::*fun)(int), int stopCondition, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),obj(obj){
 
     if((socketHandle=socket(domain,type,protocol))<0)
         cout<<strerror(errno);
@@ -26,8 +26,7 @@ receiver<T,B>::receiver(void (B::*fun)(T), T stopCondition, int port, string ip_
         cout<<strerror(errno);
 }
 
-template <typename T,class B>
-receiver<T,B>::~receiver() {
+receiver::~receiver() {
     if(shutdown(clientSocketHandle,SHUT_RDWR)<0)
         cout<<strerror(errno);
 
@@ -35,8 +34,8 @@ receiver<T,B>::~receiver() {
         cout<<strerror(errno);
 }
 
-template <typename T,class B>
-void receiver<T,B>::operator()() {
+
+void receiver::operator()() {
 
     if(listen(socketHandle,1)<0)
         cout<<strerror(errno);
@@ -48,8 +47,8 @@ void receiver<T,B>::operator()() {
 
     do{
 
-        if(recv(clientSocketHandle,&buffer,sizeof(T),0)>0)
-            fun_ptr(buffer);
+        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
+            (obj->*fun_ptr)(buffer);
 
     }while(buffer!=stopCondition);
 }
