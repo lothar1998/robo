@@ -35,6 +35,7 @@ void controller::operator()(){
     receiver recv(this,ptr,(int)7777,port,ip_addr,domain,type,protocol);
     thread threadReceive(recv);
     threadReceive.join();
+    cout<<"joined"<<endl;
 }
 
 void controller::takeAction(int command) {
