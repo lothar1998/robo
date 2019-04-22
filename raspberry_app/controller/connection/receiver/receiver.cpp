@@ -16,6 +16,7 @@ receiver::receiver(controller * obj, void (controller::*fun)(int), int stopCondi
     if((socketHandle=socket(domain,type,protocol))<0)
         cout<<strerror(errno);
 
+    cout<<socketHandle<<endl;
 
     address.sin_family = domain;
     inet_pton(domain,ip_addr.c_str(),&address.sin_addr);
@@ -36,6 +37,8 @@ receiver::~receiver() {
 
 
 void receiver::operator()() {
+
+    cout<<socketHandle<<endl;
 
     if(listen(socketHandle,1)<0)
         cout<<strerror(errno);
