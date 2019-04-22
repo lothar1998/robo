@@ -10,65 +10,32 @@
 #include <iostream>
 #include <cerrno>
 #include <cstring>
+#include <thread>
+#include "raspberry_app/controller/connection/receiver/receiver.h"
 #define STOP_CONDITION 0xFFFFFFFF
 
 
 using namespace std;
 
 
-controller::controller(action **tasks, size_t sizeTasks, unsigned int port, string ip_addr, int domain, int type, int protocol) {
-
-    this->tasks = tasks;
-    this->sizeTasks=sizeTasks;
-    this->buffer=-1;
-
-
-    if((socketHandle=socket(domain,type,protocol))<0)
-        cout<<strerror(errno);
-
-
-    address.sin_family = domain;
-    inet_pton(domain,ip_addr.c_str(),&address.sin_addr);
-    address.sin_port=htons(port);
-
-
-    if((bind(socketHandle,(struct sockaddr *)&address,sizeof(address)))<0)
-        cout<<strerror(errno);
+controller::controller(action **tasks, size_t sizeTasks, unsigned int port, string ip_addr, int domain, int type, int protocol):tasks(tasks),sizeTasks(sizeTasks),port(port),ip_addr(ip_addr),domain(domain),type(type),protocol(protocol) {
 
 }
 
 controller::~controller() {
 
-    if(shutdown(clientSocketHandle,SHUT_RDWR)<0)
-        cout<<strerror(errno);
 
-    if(shutdown(socketHandle,SHUT_RDWR)<0)
-        cout<<strerror(errno);
 
 }
 
-void controller::takeAction() {
+void controller::operator()(){
+    thread threadReceive((receiver(takeAction,(int)7777,port,ip_addr,domain,type,protocol)));
+    threadReceive.join();
+}
+
+void controller::takeAction(int command) {
 
     for(int i=0;i<sizeTasks;i++)
-        tasks[i]->takeAction(buffer);
-}
+        tasks[i]->takeAction(command);
 
-void controller::run() {
-
-
-    if(listen(socketHandle,1)<0)
-        cout<<strerror(errno);
-
-
-
-    if((clientSocketHandle=accept(socketHandle,(struct sockaddr*)&clientAddress,(socklen_t*)&clientAddressSize))<0)
-        cout<<strerror(errno);
-
-
-    do{
-
-        if(recv(clientSocketHandle,&buffer,sizeof(int),0)>0)
-            takeAction();
-
-    }while(buffer!=STOP_CONDITION);
 }

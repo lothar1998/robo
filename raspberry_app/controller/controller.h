@@ -16,25 +16,21 @@ public:
     controller(action **,size_t,unsigned int, std::string = "127.0.0.1", int = AF_INET,int = SOCK_STREAM,int = 0);
     ~controller();
 
-    void run();
+    void operator()();
 
 
 private:
 
+    void takeAction(int);
 
     action ** tasks;
     size_t sizeTasks;
 
-    int socketHandle;
-    struct sockaddr_in address;
-
-    int clientSocketHandle;
-    struct sockaddr_in clientAddress;
-    size_t clientAddressSize;
-
-    int buffer;
-
-    void takeAction();
+    unsigned int port;
+    std::string ip_addr;
+    int domain;
+    int type;
+    int protocol;
 
 
 };
