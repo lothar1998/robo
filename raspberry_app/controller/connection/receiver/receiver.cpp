@@ -30,8 +30,13 @@ receiver::receiver(controller * obj, void (controller::*fun)(int), int stopCondi
 }
 
 receiver::~receiver() {
+
+    cout<<"client close"<<endl;
+
     if(shutdown(clientSocketHandle,SHUT_RDWR)<0)
         cout<<strerror(errno);
+
+    cout<<"server close"<<endl;
 
     if(shutdown(socketHandle,SHUT_RDWR)<0)
         cout<<strerror(errno);
