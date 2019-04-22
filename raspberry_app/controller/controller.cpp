@@ -32,7 +32,7 @@ void controller::operator()(){
 
     auto ptr = &controller::takeAction;
 
-    receiver<int,controller> recv(ptr,(int)7777,port,ip_addr,domain,type,protocol);
+    receiver<int,controller> recv(nullptr,(int)7777,port,ip_addr,domain,type,protocol);
     thread threadReceive(recv);
     threadReceive.join();
 }
