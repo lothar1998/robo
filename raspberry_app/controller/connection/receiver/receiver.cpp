@@ -10,8 +10,8 @@
 #include <cstring>
 #include <iostream>
 
-
-receiver::receiver(controller * obj, void (controller::*fun)(int), int stopCondition, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),obj(obj){
+template <typename T,class B>
+receiver<T,B>::receiver(B * obj, void (B::*fun)(T), T stopCondition, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),obj(obj){
 
     if((socketHandle=socket(domain,type,protocol))<0)
         cout<<strerror(errno);
@@ -29,7 +29,8 @@ receiver::receiver(controller * obj, void (controller::*fun)(int), int stopCondi
     cout<<"binded"<<endl;
 }
 
-receiver::~receiver() {
+template <typename T, class B>
+receiver<T,B>::~receiver() {
 
     cout<<"client close"<<endl;
 
@@ -42,8 +43,8 @@ receiver::~receiver() {
         cout<<strerror(errno);
 }
 
-
-void receiver::operator()() {
+template <typename T, class B>
+void receiver<T,B>::operator()() {
 
     cout<<socketHandle<<endl;
 
