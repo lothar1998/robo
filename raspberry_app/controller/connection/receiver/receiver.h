@@ -78,7 +78,7 @@ void receiver<T,B>::operator()() {
 
     do {
 
-        if (recv(clientSocketHandle, &buffer, sizeof(int), 0) > 0)
+        if (recv(clientSocketHandle, &buffer, sizeof(T), 0) > 0)
             (obj->*fun_ptr)(buffer);
 
     } while (buffer != stopCondition);
