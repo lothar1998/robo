@@ -25,7 +25,7 @@ controller::controller(setAction **tasks, size_t sizeTasks, unsigned int port, s
 
 void controller::operator()(){
 
-    receiver<int,controller> recv(this,&controller::takeAction,(int)STOP_CONDITION,port,ip_addr,domain,type,protocol);
+    receiver<int32_t,controller> recv(this,&controller::takeAction,(int)STOP_CONDITION,port,ip_addr,domain,type,protocol);
     thread threadReceive(std::ref(recv));
     threadReceive.join();
 
