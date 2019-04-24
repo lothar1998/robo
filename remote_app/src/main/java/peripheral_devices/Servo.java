@@ -5,7 +5,7 @@ public class Servo implements Device {
     /**
      * numbers of servo's channels
      */
-    public enum channel{
+    public enum Channel{
         CH0 (0),
         CH1 (1),
         CH2 (2),
@@ -25,7 +25,7 @@ public class Servo implements Device {
 
         private int value;
 
-        channel(int value){
+        Channel(int value){
             this.value=value;
         }
 
@@ -41,7 +41,7 @@ public class Servo implements Device {
     /**
      * servo's channel
      */
-    private channel ch;
+    private Channel ch;
 
     /**
      * device id
@@ -52,7 +52,7 @@ public class Servo implements Device {
      * construct servo object
      * @param ch number of servo's channel
      */
-    public Servo(channel ch){
+    public Servo(Channel ch){
         this.ch=ch;
     }
 
