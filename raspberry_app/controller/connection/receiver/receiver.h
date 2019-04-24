@@ -51,7 +51,7 @@ struct shutdownException: public exception{
 template <typename T, class B>
 class receiver {
 public:
-    receiver(B *, void (B::*)(T),T,size_t ,int,string = "127.0.0.1",int = AF_INET,int = SOCK_STREAM,int = 0);
+    receiver(B *, void (B::*)(T),T,int,string = "127.0.0.1",int = AF_INET,int = SOCK_STREAM,int = 0);
     ~receiver();
     void operator()();
 
@@ -69,14 +69,11 @@ private:
     struct sockaddr_in clientAddress;
     size_t clientAddressSize;
 
-    T * buffer;
-    size_t bufferSize;
+    T buffer;
 };
 
 template <typename T,class B>
-receiver<T,B>::receiver(B * obj, void (B::*fun)(T), T stopCondition, size_t bufferSize, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),obj(obj),bufferSize(bufferSize){
-
-    buffer = new T[bufferSize];
+receiver<T,B>::receiver(B * obj, void (B::*fun)(T), T stopCondition, int port, string ip_addr, int domain, int type, int protocol):fun_ptr(fun),stopCondition(stopCondition),obj(obj){
 
     if((socketHandle=socket(domain,type,protocol))<0)
         throw socketException();
@@ -114,7 +111,7 @@ void receiver<T,B>::operator()() {
 
         do {
 
-            if (recv(clientSocketHandle, &buffer, sizeof(T)*bufferSize, MSG_WAITALL) > 0)
+            if (recv(clientSocketHandle, &buffer, sizeof(T), MSG_WAITALL) > 0)
                 (obj->*fun_ptr)(buffer);
             else
                 break;
