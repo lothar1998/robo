@@ -2,6 +2,9 @@ package peripheral_devices;
 
 public class Servo implements Device {
 
+    /**
+     * numbers of servo's channels
+     */
     public enum channel{
         CH0 (0),
         CH1 (1),
@@ -26,18 +29,39 @@ public class Servo implements Device {
             this.value=value;
         }
 
+        /**
+         * getter to value of channel
+         * @return value of channel
+         */
         public int getInt(){
             return this.value;
         }
     }
 
+    /**
+     * servo's channel
+     */
     private channel ch;
+
+    /**
+     * device id
+     */
     private static int commandNumber = 0;
 
+    /**
+     * construct servo object
+     * @param ch number of servo's channel
+     */
     public Servo(channel ch){
         this.ch=ch;
     }
 
+    /**
+     *
+     * @param angle set servo's angle - max 360 = 180°
+     * @see #setServo(int, int)
+     * @return command to send
+     */
     public int setServoAngle(int angle){
 
         if(angle>=0&&angle<=360) {
@@ -48,21 +72,42 @@ public class Servo implements Device {
             return 0;
     }
 
+    /**
+     * set servo's minimum angle = 0°
+     * @see #setServo(int, int)
+     * @return command to send
+     */
     public int setServoMin(){
 
         return setServo(0,1);
     }
 
+    /**
+     * set servo's medium angle = 90°
+     * @see #setServo(int, int)
+     * @return command to send
+     */
     public int setServoMid(){
 
         return setServo(0,2);
     }
 
+    /**
+     * set servo's maximum angle = 180°
+     * @see #setServo(int, int)
+     * @return commend to send
+     */
     public int setServoMax(){
 
         return setServo(0,3);
     }
 
+    /**
+     * set servo's angle using following function
+     * @param angle servo's angle
+     * @param functionNumber sets angle using following function
+     * @return command to send
+     */
     private int setServo(int angle, int functionNumber){
 
         int command = commandNumber;
