@@ -1,5 +1,8 @@
-package peripheral_devices;
+package com.robo.peripheral_devices;
 
+/**
+ * Class implementation of servo mechanisms
+ */
 public class Servo implements Device {
 
     /**
@@ -57,7 +60,7 @@ public class Servo implements Device {
     }
 
     /**
-     *
+     * set servo angle
      * @param angle set servo's angle - max 360 = 180°
      * @see #setServo(int, int)
      * @return command to send

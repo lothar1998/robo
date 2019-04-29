@@ -1,5 +1,6 @@
-package peripheral_devices;
+package test.com.robo.peripheral_devices;
 
+import com.robo.peripheral_devices.Engine;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EngineTest {
 
-    static Engine engineLeft;
-    static Engine engineRight;
+    private static Engine engineLeft;
+    private static Engine engineRight;
 
     @BeforeAll
     static void createObjectTest(){

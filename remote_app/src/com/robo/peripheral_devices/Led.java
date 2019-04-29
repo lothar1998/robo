@@ -1,7 +1,13 @@
-package peripheral_devices;
+package com.robo.peripheral_devices;
 
+/**
+ * Class implementation of led
+ */
 public class Led implements Device {
 
+    /**
+     * led pin
+     */
     public enum Pin{
 
         PIN0(0),
@@ -42,26 +48,56 @@ public class Led implements Device {
             this.value=value;
         }
 
+        /**
+         * getter to enum value
+         * @return enum value
+         */
         public int getInt(){
             return this.value;
         }
     }
 
+    /**
+     * number of led pin
+     */
     private Pin pin;
+
+    /**
+     * device id
+     */
     private static int commandNumber=2;
 
+    /**
+     * construct Led object
+     * @param pin number of led pin
+     */
     public Led(Pin pin){
         this.pin=pin;
     }
 
+    /**
+     * turn on led
+     * @see #setLed(int)
+     * @return command to send
+     */
     public int on(){
         return setLed(0);
     }
 
+    /**
+     * turn off led
+     * @see #setLed(int)
+     * @return command to send
+     */
     public int off(){
         return setLed(1);
     }
 
+    /**
+     * generate command to send
+     * @param val id of function
+     * @return command
+     */
     private int setLed(int val){
 
         int command = commandNumber;

@@ -1,5 +1,6 @@
-package peripheral_devices;
+package test.com.robo.peripheral_devices;
 
+import com.robo.peripheral_devices.Led;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
