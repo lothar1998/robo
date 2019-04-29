@@ -3,13 +3,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane onKeyPressed="#pressedKeyAction" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.robo.main.View">
    <children>
-      <Slider fx:id="sliderEngineLeft" layoutX="32.0" layoutY="130.0" min="-100.0" onMouseClicked="#engineLeftAction" onMouseDragged="#engineLeftAction" orientation="VERTICAL" showTickLabels="true" showTickMarks="true" />
-      <Slider fx:id="sliderEngineRight" layoutX="533.0" layoutY="130.0" min="-100.0" onMouseClicked="#engineRightAction" onMouseDragged="#engineRightAction" orientation="VERTICAL" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="sliderEngineLeft" disable="true" layoutX="32.0" layoutY="130.0" min="-100.0" onMouseClicked="#engineLeftAction" onMouseDragged="#engineLeftAction" orientation="VERTICAL" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="sliderEngineRight" disable="true" layoutX="533.0" layoutY="130.0" min="-100.0" onMouseClicked="#engineRightAction" onMouseDragged="#engineRightAction" orientation="VERTICAL" showTickLabels="true" showTickMarks="true" />
       <Button fx:id="connectButton" layoutX="328.0" layoutY="21.0" mnemonicParsing="false" onAction="#getIPAddressAction" text="Connect" />
       <TextField fx:id="IPAddress" layoutX="179.0" layoutY="21.0" promptText="IP address" />
+      <Button fx:id="stopButton" disable="true" layoutX="280.0" layoutY="347.0" mnemonicParsing="false" onAction="#stopEngineAction" text="Stop" />
+      <ToggleButton fx:id="lightFront" disable="true" layoutX="33.0" layoutY="298.0" mnemonicParsing="false" onAction="#frontLightAction" text="Front light" />
+      <ToggleButton fx:id="lightBack" disable="true" layoutX="33.0" layoutY="335.0" mnemonicParsing="false" onAction="#backLightAction" prefHeight="25.0" prefWidth="71.0" text="Back light" />
    </children>
 </AnchorPane>
