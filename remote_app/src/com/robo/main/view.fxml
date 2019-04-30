@@ -12,8 +12,10 @@
       <Slider fx:id="sliderEngineRight" disable="true" layoutX="96.0" layoutY="130.0" min="-100.0" onMouseClicked="#engineRightAction" onMouseDragged="#engineRightAction" orientation="VERTICAL" showTickLabels="true" showTickMarks="true" />
       <Button fx:id="connectButton" layoutX="346.0" layoutY="21.0" mnemonicParsing="false" onAction="#getIPAddressAction" text="Connect" />
       <TextField fx:id="IPAddress" layoutX="179.0" layoutY="21.0" promptText="IP address" />
-      <Button fx:id="stopButton" disable="true" layoutX="57.0" layoutY="318.0" mnemonicParsing="false" onAction="#stopEngineAction" text="Stop" />
-      <ToggleButton fx:id="lightFront" disable="true" layoutX="37.0" layoutY="400.0" mnemonicParsing="false" onAction="#frontLightAction" prefHeight="27.0" prefWidth="88.0" text="Front light" />
-      <ToggleButton fx:id="lightBack" disable="true" layoutX="37.0" layoutY="440.0" mnemonicParsing="false" onAction="#backLightAction" prefHeight="27.0" prefWidth="88.0" text="Back light" />
+      <Button fx:id="stopButton" disable="true" layoutX="58.0" layoutY="288.0" mnemonicParsing="false" onAction="#stopEngineAction" text="Stop" />
+      <ToggleButton fx:id="lightFront" disable="true" layoutX="33.0" layoutY="552.0" mnemonicParsing="false" onAction="#frontLightAction" prefHeight="27.0" prefWidth="88.0" text="Front light" />
+      <ToggleButton fx:id="lightBack" disable="true" layoutX="33.0" layoutY="592.0" mnemonicParsing="false" onAction="#backLightAction" prefHeight="27.0" prefWidth="88.0" text="Back light" />
+      <Slider fx:id="sliderHorizontal" disable="true" layoutX="7.0" layoutY="353.0" max="360.0" onMouseClicked="#cameraHorizontalAction" onMouseDragged="#cameraHorizontalAction" value="180.0" />
+      <Slider fx:id="sliderVertical" disable="true" layoutX="70.0" layoutY="391.0" max="360.0" onMouseClicked="#cameraVerticalAction" onMouseDragged="#cameraVerticalAction" orientation="VERTICAL" value="180.0" />
    </children>
 </AnchorPane>
