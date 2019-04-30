@@ -115,20 +115,22 @@ public class View{
     }
 
     public void getIPAddressAction(ActionEvent event){
-        IP=IPAddress.getText();
-        connectButton.setDisable(true);
-        IPAddress.setDisable(true);
-        engineLeft = new Engine(Engine.Channel.CHL);
-        engineRight = new Engine(Engine.Channel.CHR);
-        ledFL = new Led(Led.Pin.PIN27);
-        ledFR = new Led(Led.Pin.PIN25);
-        ledBL = new Led(Led.Pin.PIN4);
-        ledBR = new Led(Led.Pin.PIN5);
-        sliderEngineLeft.setDisable(false);
-        sliderEngineRight.setDisable(false);
-        lightFront.setDisable(false);
-        lightBack.setDisable(false);
-        stopButton.setDisable(false);
+        if(!IPAddress.getText().equals("")) {
+            IP = IPAddress.getText();
+            connectButton.setDisable(true);
+            IPAddress.setDisable(true);
+            engineLeft = new Engine(Engine.Channel.CHL);
+            engineRight = new Engine(Engine.Channel.CHR);
+            ledFL = new Led(Led.Pin.PIN27);
+            ledFR = new Led(Led.Pin.PIN25);
+            ledBL = new Led(Led.Pin.PIN4);
+            ledBR = new Led(Led.Pin.PIN5);
+            sliderEngineLeft.setDisable(false);
+            sliderEngineRight.setDisable(false);
+            lightFront.setDisable(false);
+            lightBack.setDisable(false);
+            stopButton.setDisable(false);
+        }
     }
 
     private void sendMessage(int command,String IP, int port) throws Exception{
