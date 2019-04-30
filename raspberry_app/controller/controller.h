@@ -8,7 +8,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string>
-#include "raspberry_app/servos/servo.h"
 #include "raspberry_app/action_interface/setAction.h"
 
 class controller {
